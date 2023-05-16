@@ -1,11 +1,15 @@
 import CustomRoutes from "./components/CustomRoutes";
+// import { CartProvider } from "./components/context/CartContext";
 
 function App() {
 
   return (
     <>
-    <CustomRoutes />
-    <h1>Hello there, this is the shopping cart</h1>
+      {/* <CartProvider> */}
+        <div className="content">
+          <CustomRoutes />
+        </div>
+      {/* </CartProvider> */}
     </>
   )
 }
