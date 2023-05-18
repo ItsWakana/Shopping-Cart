@@ -13,12 +13,15 @@ const ShoppingCart = () => {
             <div className="basket-container">
                 {cart.map((item, id) => (
                     <div className="basket-item" key={id}>
-                        <b>Product: </b>
-                        {item.name}
-                        <b> Price: </b>
-                        £{item.price}.00
-                        <b> Quantity: </b>
-                        {item.qty}
+                        <img className="basket-item__photo" src={`/images/${item.name}.jpg`} alt={item.name} />
+                        <div className="basket-item__details">
+                            <b>Product: </b>
+                            {item.name}
+                            <b> Price: </b>
+                            £{item.price}.00
+                            <b> Quantity: </b>
+                            {item.qty}
+                        </div>
                     </div>
                 ))}
             </div>
