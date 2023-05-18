@@ -10,16 +10,18 @@ const ShoppingCart = () => {
     return (
         <>
             <h1>Your Basket</h1>
-            {cart.map((item, id) => (
-                <div key={id}>
-                    <b>Product: </b>
-                    {item.name}
-                    <b> Price: </b>
-                    £{item.price}.00
-                    <b> Quantity: </b>
-                    {item.qty}
-                </div>
-            ))}
+            <div className="basket-container">
+                {cart.map((item, id) => (
+                    <div className="basket-item" key={id}>
+                        <b>Product: </b>
+                        {item.name}
+                        <b> Price: </b>
+                        £{item.price}.00
+                        <b> Quantity: </b>
+                        {item.qty}
+                    </div>
+                ))}
+            </div>
         </>
     )
 }

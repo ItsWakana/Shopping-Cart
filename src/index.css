@@ -68,6 +68,15 @@ body {
   gap: 5px;
 }
 
+.nav-link {
+  color: #213547;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #213547;
+}
+
 .basket-quantity {
   color: red;
   transition: transform 50ms ease-in;
@@ -101,6 +110,20 @@ body {
   color: white;
 }
 
+.basket-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.basket-item {
+  width: 200px;
+  height: 200px;
+  border: solid 2px red;
+}
+
 .product-container {
   display: flex;
   justify-content: center;
@@ -116,6 +139,7 @@ body {
   justify-content: center;
   padding: 20px;
   cursor: pointer;
+  border-radius: 6px;
 }
 
 

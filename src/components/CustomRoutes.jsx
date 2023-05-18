@@ -13,15 +13,13 @@ const CustomRoutes = () => {
             <BrowserRouter>
                 <nav className="nav-bar">
                     <div className="nav-bar__left">
-                        <Link to="/">Home</Link>
-                        <Link to="/store">Store</Link>
+                        <Link className="nav-link" to="/">Home</Link>
+                        <Link className="nav-link" to="/store">Store</Link>
                     </div>
                     <div className="nav-bar__right">
                         <Link to="/basket">
-                            {/* <p>Basket</p> */}
                             <BasketIcon />
                         </Link>
-                        {/* <BasketIcon/> */}
                     </div>
                 </nav>
                 <Routes>
