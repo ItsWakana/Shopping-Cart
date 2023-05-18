@@ -70,6 +70,11 @@ body {
 
 .basket-quantity {
   color: red;
+  transition: transform 50ms ease-in;
+}
+
+.basket-quantity.item-placed {
+  transform: scale(1.4);
 }
 
 .basket-icon {

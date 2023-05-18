@@ -6,6 +6,8 @@ export const CartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([]);
 
+    const [itemAdded, setItemAdded] = useState(false);
+
     const totalQty = cart.reduce((acc, curr) => {
         return acc + curr.qty;
     }, 0);
@@ -14,7 +16,7 @@ export const CartProvider = ({ children }) => {
         // console.log(`Product: ${product.name}`);
         // console.log(`Quantity: ${desiredQty}`);
         if (desiredQty < 1) return;
-
+        setItemAdded(true);
         let hasProductInCart = false;
         const updatedCart = cart.map((item) => {
             if (item.id === product.id) {
@@ -32,7 +34,7 @@ export const CartProvider = ({ children }) => {
         }
     return (
         <CartContext.Provider value={{
-            cart, totalQty, handleCartAdd,
+            cart, totalQty, handleCartAdd, itemAdded, setItemAdded
         }}>
             {children}
         </CartContext.Provider>
