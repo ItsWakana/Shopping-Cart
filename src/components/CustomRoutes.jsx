@@ -18,9 +18,10 @@ const CustomRoutes = () => {
                     </div>
                     <div className="nav-bar__right">
                         <Link to="/basket">
-                            <p>Basket</p>
+                            {/* <p>Basket</p> */}
+                            <BasketIcon />
                         </Link>
-                        <BasketIcon/>
+                        {/* <BasketIcon/> */}
                     </div>
                 </nav>
                 <Routes>
