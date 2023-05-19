@@ -26,12 +26,8 @@ const Product = ({ product }) => {
 
             <p>£{product.price}.00</p>
             <div className="product__input-container">
-                <input className="product__quantity-input"
-                type="number"
-                value={quantity}
-                onChange={handleInput}></input>
                 <button 
-                onClick={() => handleCartAdd(product, quantity)}>
+                onClick={() => handleCartAdd(product)}>
                     Add to Cart
                 </button>
             </div>

@@ -1,30 +1,30 @@
 //This can be the actual shopping cart page, so when we have this route clicked, then the user will get directed to this component. We can implement the widget or icon that directs us here on the main homepage.
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CartContext from "./context/CartContext";
+import NavigationContext from "./context/NavigationContext";
+import BasketItem from "./BasketItem";
 
 const ShoppingCart = () => {
 
     const { cart } = useContext(CartContext);
+    const { hideMobileMenu } = useContext(NavigationContext);
 
+    useEffect(() => {
+        hideMobileMenu(false);
+    },[]);
     return (
         <>
             <h1>Your Basket</h1>
-            <div className="basket-container">
-                {cart.map((item, id) => (
-                    <div className="basket-item" key={id}>
-                        <img className="basket-item__photo" src={`/images/${item.name}.jpg`} alt={item.name} />
-                        <div className="basket-item__details">
-                            <b>Product: </b>
-                            {item.name}
-                            <b> Price: </b>
-                            £{item.price}.00
-                            <b> Quantity: </b>
-                            {item.qty}
-                        </div>
-                    </div>
-                ))}
-            </div>
+            {cart.length ? (
+                <div className={`basket-container ${cart.length > 0 ? 'has-items' : ''}`}>
+                    {cart.map((item) => (
+                        <BasketItem key={item.id} item={item}/>
+                    ))}
+                </div>
+                ) : <div>Your cart is empty</div>}
+                
+
         </>
     )
 }
