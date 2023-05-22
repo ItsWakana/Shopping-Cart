@@ -278,6 +278,7 @@ button:focus-visible {
 .mobile-menu {
   display: none;
   transition: all 250ms ease;
+  font-size: 3rem;
 }
 
 @media screen and (max-width: 550px) {
@@ -294,7 +295,8 @@ button:focus-visible {
 
   .nav-bar.open {
     flex-direction: column;
-    height: 185px;
+    justify-content: initial;
+    height: 100%;
   }
 
   .nav-bar__left-links.open {
