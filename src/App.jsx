@@ -12,32 +12,10 @@ function App() {
   
   return (
     <>
-        {/* <nav className={`nav-bar ${showItems ? 'open' : ''}`}>
-          <div className="nav-bar__left">
-            <div className="hamburger-container" onClick={toggleMobileMenu}>
-              <div className="hamburger-line"></div>
-              <div className="hamburger-line"></div>
-              <div className="hamburger-line"></div>
-            </div>
-            <div className="nav-bar__left-links">
-              <Link className="nav-link" to="/">Home</Link>
-              <Link className="nav-link" to="/store">Store</Link>
-            </div>
-          </div>
-          <div className={`mobile-menu ${showItems ? 'open' : ''}`}>
-            <Link className="nav-link" to="/">Home</Link>
-            <Link className="nav-link" to="/store">Store</Link>
-          </div>
-          <div className="nav-bar__right">
-              <Link to="/basket">
-                  <BasketIcon />
-              </Link>
-          </div>
-
-        </nav> */}
         <nav className={`nav-bar ${showItems ? 'open' : ''}`}>
           <div className="nav-bar__top">
-            <div className="hamburger-container" onClick={toggleMobileMenu}>
+            {/* <div className="hamburger-container" onClick={toggleMobileMenu}> */}
+            <div className={`hamburger-container ${showItems ? 'open' : ''}`} onClick={toggleMobileMenu}>
               <div className="hamburger-line"></div>
               <div className="hamburger-line"></div>
               <div className="hamburger-line"></div>
