@@ -22,7 +22,7 @@ const ShoppingCart = () => {
                         <BasketItem key={item.id} item={item}/>
                     ))}
                 </div>
-                ) : <div>Your cart is empty</div>}
+                ) : <div><i>Your cart is empty</i></div>}
                 
 
         </>

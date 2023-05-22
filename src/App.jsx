@@ -12,7 +12,7 @@ function App() {
   
   return (
     <>
-        <nav className={`nav-bar ${showItems ? 'open' : ''}`}>
+        {/* <nav className={`nav-bar ${showItems ? 'open' : ''}`}>
           <div className="nav-bar__left">
             <div className="hamburger-container" onClick={toggleMobileMenu}>
               <div className="hamburger-line"></div>
@@ -32,6 +32,27 @@ function App() {
               <Link to="/basket">
                   <BasketIcon />
               </Link>
+          </div>
+
+        </nav> */}
+        <nav className={`nav-bar ${showItems ? 'open' : ''}`}>
+          <div className="nav-bar__top">
+            <div className="hamburger-container" onClick={toggleMobileMenu}>
+              <div className="hamburger-line"></div>
+              <div className="hamburger-line"></div>
+              <div className="hamburger-line"></div>
+            </div>
+            <div className="desktop-menu">
+              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link" to="/store">Store</Link>
+            </div>
+            <Link to="/basket">
+              <BasketIcon />
+            </Link>
+          </div>
+          <div className={`mobile-menu ${showItems ? 'open' : ''}`}>
+            <Link className="nav-link" to="/">Home</Link>
+            <Link className="nav-link" to="/store">Store</Link>
           </div>
 
         </nav>
