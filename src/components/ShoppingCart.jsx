@@ -15,14 +15,15 @@ const ShoppingCart = () => {
     },[]);
     return (
         <>
-            <h1>Your Basket</h1>
             {cart.length ? (
                 <div className={`basket-container ${cart.length > 0 ? 'has-items' : ''}`}>
+                    Shopping Bag
+                    <button className="checkout-btn">CONTINUE TO CHECKOUT</button>
                     {cart.map((item) => (
                         <BasketItem key={item.id} item={item}/>
                     ))}
                 </div>
-                ) : <div><i>Your cart is empty</i></div>}
+                ) : <div className="empty-cart-message"><i>YOUR BASKET IS CURRENTLY EMPTY</i></div>}
                 
 
         </>

@@ -26,7 +26,7 @@ const Product = ({ product }) => {
 
             <p>£{product.price}.00</p>
             <div className="product__input-container">
-                <button 
+                <button className="add-basket-btn"
                 onClick={() => handleCartAdd(product)}>
                     Add to Cart
                 </button>

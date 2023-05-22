@@ -30,17 +30,23 @@ a:hover {
 
 body {
   margin: 0;
+  padding-top: 70px;
   display: flex;
   flex-direction: column;
   min-width: 320px;
 }
 
+.slideshow {
+  margin-top: -30px;
+}
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 45px;
+  margin-top: 30px;
+
 }
+
 .nav-bar {
   padding: 27px;
   font-weight: bold;
@@ -50,7 +56,7 @@ body {
   left: 0;
   width: 100%;
   background-color: white;
-  height: 60px;
+  height: 70px;
   z-index: 100;
   transition: 150ms ease-in;
 
@@ -80,18 +86,32 @@ body {
   color: #213547;
 }
 
+.empty-cart-message {
+  padding: 7px 20px;
+  border-radius: 5px;
+  background-color: rgb(252, 246, 199);
+}
+
+.checkout-btn {
+  color: white;
+}
+
+.checkout-btn:hover {
+  background-color: #303030;
+}
+
 .basket-quantity {
-  color: #ff0000;
   transition: transform 50ms ease-in;
 }
 
 .basket-quantity.item-placed {
-  transform: scale(1.4);
+  transform: scale(1.3);
 }
 
 .basket-icon {
-  width: 22px;
+  width: 26px;
   position: relative;
+  filter: invert(91%) sepia(10%) saturate(930%) hue-rotate(67deg) brightness(91%) contrast(88%);
 }
 
 .remove-icon {
@@ -116,7 +136,7 @@ body {
   width: 15px;
   height: 15px;
   border-radius: 100%;
-  background: red;
+  background: black;
   color: white;
 }
 
@@ -124,18 +144,20 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   border-radius: 7px;
   padding: 20px;
   gap: 50px;
 }
 
 .basket-container.has-items {
-  border: solid 2px black;
+  /* border-left: solid 2px black; */
 }
 
 .basket-item {
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding-bottom: 10px;
   border-bottom: 1px solid black;
   width: 100%;
@@ -143,15 +165,20 @@ body {
 }
 
 .basket-item__photo {
-  width: 170px;
-  height: 170px;
+  width: 100px;
+  height: 100px;
 }
 
 .basket-item__details {
   display: flex;
   flex-direction: column;
+  font-size: 0.8rem;
+  width: 110px;
 }
 
+.basket-item__details b {
+  font-size: 0.9rem;
+}
 .product-container {
   display: flex;
   justify-content: center;
@@ -214,6 +241,9 @@ h1 {
 
 select {
   width: 50px;
+  background-color: none;
+  background: none;
+  border: solid 2px #a6daa9;
 }
 
 button {
@@ -227,7 +257,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+.add-basket-btn:hover {
   background: #3d7296;
 }
 button:focus,
@@ -243,12 +273,10 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 .hamburger-container {
+  display: none;
   width: 30px;
   height: 20px;
   position: relative;
@@ -300,7 +328,6 @@ button:focus-visible {
   display: flex;
   gap: 8px;
 }
-
 @media screen and (max-width: 550px) {
 
   .mobile-menu.open {

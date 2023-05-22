@@ -1,5 +1,7 @@
 import { useEffect, useContext } from "react";
 import NavigationContext from "./context/NavigationContext";
+// import ImageGallery from "./ImageGallery";
+import DemoCarousel from "./DemoCarousel";
 
 const Home = () => {
 
@@ -9,7 +11,8 @@ const Home = () => {
         hideMobileMenu(false);
     },[]);
     return (
-        <h1>Home</h1>
+        // <h1>Home</h1>
+        <DemoCarousel />
     )
 }
 
