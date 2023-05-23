@@ -26,20 +26,21 @@ const BasketItem = ({ item }) => {
         <div className="basket-item" key={item.id}>
             <img className="basket-item__photo" src={`${import.meta.env.BASE_URL}images/${item.name}.jpg`} alt={item.name} />
             <div className="basket-item__details">
-                <b>Product: </b>
-                {item.name}
-                <b> Price: </b>
-                £{item.price}
-                <b> Quantity: </b>
-                <select name="qty" id={`qty-${item.id}`} onChange={handleEdit}value={qty}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                <div className="basket-item__details-name">
+                    <b>{item.name}</b>
+                </div>
+                <div className="basket-item__details-rest">
+                    <b>£{item.price}</b>
+                    <select name="qty" id={`qty-${item.id}`} onChange={handleEdit}value={qty}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
 
-                <img className="remove-icon" src="cross.svg" alt="bin-icon" onClick={() => removeCartItem(item.id)}/>
+                    <img className="remove-icon" src="cross.svg" alt="bin-icon" onClick={() => removeCartItem(item.id)}/>
+                </div>
             </div>
         </div>
     )

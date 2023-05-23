@@ -6,7 +6,7 @@ const BasketTotal = () => {
     const { totalPrice } = useContext(CartContext);
 
     return (
-        <h2>Total: £{totalPrice}</h2>
+        <h4 className="basket__header" >Total: £{totalPrice}</h4>
     )
 
 }

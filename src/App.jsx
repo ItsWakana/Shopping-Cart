@@ -14,23 +14,22 @@ function App() {
     <>
         <nav className={`nav-bar ${showItems ? 'open' : ''}`}>
           <div className="nav-bar__top">
-            {/* <div className="hamburger-container" onClick={toggleMobileMenu}> */}
             <div className={`hamburger-container ${showItems ? 'open' : ''}`} onClick={toggleMobileMenu}>
               <div className="hamburger-line"></div>
               <div className="hamburger-line"></div>
               <div className="hamburger-line"></div>
             </div>
             <div className="desktop-menu">
-              <Link className="nav-link" to="/">Home</Link>
-              <Link className="nav-link" to="/store">Store</Link>
+              <Link className="nav-link" to="/">HOME</Link>
+              <Link className="nav-link" to="/store">GAMES</Link>
             </div>
             <Link to="/basket">
               <BasketIcon />
             </Link>
           </div>
           <div className={`mobile-menu ${showItems ? 'open' : ''}`}>
-            <Link className="nav-link" to="/">Home</Link>
-            <Link className="nav-link" to="/store">Store</Link>
+            <Link className="nav-link" to="/">HOME</Link>
+            <Link className="nav-link" to="/store">GAMES</Link>
           </div>
 
         </nav>
