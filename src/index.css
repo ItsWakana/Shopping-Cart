@@ -3,6 +3,10 @@
   line-height: 1.5;
   font-weight: 400;
 
+
+  --off-black-clr: #1b1c1c;
+  /* --suplementary-clr: #a6daa9; */
+  --suplementary-clr: #6fd274;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -24,9 +28,9 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
-a:hover {
+/* a:hover {
   color: #535bf2;
-}
+} */
 
 body {
   margin: 0;
@@ -78,13 +82,13 @@ body {
 } */
 
 .nav-link {
-  color: #213547;
+  color: var(--off-black-clr);
   font-weight: bold;
 }
 
-.nav-link:hover {
+/* .nav-link:hover {
   color: #213547;
-}
+} */
 
 .empty-cart-message {
   padding: 7px 20px;
@@ -111,7 +115,9 @@ body {
 .basket-icon {
   width: 26px;
   position: relative;
-  filter: invert(91%) sepia(10%) saturate(930%) hue-rotate(67deg) brightness(91%) contrast(88%);
+  filter: invert(75%) sepia(31%) saturate(659%) hue-rotate(72deg) brightness(94%) contrast(85%);
+  /* filter: invert(91%) sepia(10%) saturate(930%) hue-rotate(67deg) brightness(91%) contrast(88%); */
+
 }
 
 .remove-icon {
@@ -136,7 +142,7 @@ body {
   width: 15px;
   height: 15px;
   border-radius: 100%;
-  background: black;
+  background: var(--off-black-clr);
   color: white;
 }
 
@@ -230,7 +236,8 @@ body {
 }
 
 .product__input-container button {
-  background: #4b84aa;
+  /* background: #4b84aa; */
+  background-color: var(--suplementary-clr);
   color: white;
 }
 
@@ -243,7 +250,7 @@ select {
   width: 50px;
   background-color: none;
   background: none;
-  border: solid 2px #a6daa9;
+  border: solid 2px var(--suplementary-clr);
 }
 
 button {
@@ -258,7 +265,7 @@ button {
   transition: border-color 0.25s;
 }
 .add-basket-btn:hover {
-  background: #3d7296;
+  background: #61c766;
 }
 button:focus,
 button:focus-visible {
@@ -267,12 +274,12 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: var(--off-black-clr);
     background-color: #ffffff;
   }
-  a:hover {
+  /* a:hover {
     color: #747bff;
-  }
+  } */
 }
 
 .hamburger-container {
@@ -287,7 +294,7 @@ button:focus-visible {
 .hamburger-line {
   width: 100%;
   height: 6px;
-  background-color: #000;
+  background-color: var(--off-black-clr);
   position: absolute;
   left: 0;
   transition: transform 0.3s ease;
