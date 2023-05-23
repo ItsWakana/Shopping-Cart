@@ -1,27 +1,17 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import CartContext from "./context/CartContext";
 
 const Product = ({ product }) => {
 
-    const [quantity, setQuantity] = useState(1);
-
     const { handleCartAdd } = useContext(CartContext);
 
-    const handleInput = (e) => {
-        if (e.target.value === '') {
-            setQuantity('');
-        } else {
-            setQuantity(parseInt(e.target.value));
-        }
-
-    }
 
     return (
         <div key={product.id} className="product">
             <h4 className="product__heading">{product.name}</h4>
-
+            
             <img className="product__photo"
-            src={`/images/${product.name}.jpg`} 
+            src={`${import.meta.env.BASE_URL}images/${product.name}.jpg`} 
             alt={product.name}></img>
 
             <p>£{product.price}</p>

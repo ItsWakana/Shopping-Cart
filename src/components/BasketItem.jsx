@@ -24,7 +24,7 @@ const BasketItem = ({ item }) => {
     }
     return (
         <div className="basket-item" key={item.id}>
-            <img className="basket-item__photo" src={`/images/${item.name}.jpg`} alt={item.name} />
+            <img className="basket-item__photo" src={`${import.meta.env.BASE_URL}images/${item.name}.jpg`} alt={item.name} />
             <div className="basket-item__details">
                 <b>Product: </b>
                 {item.name}

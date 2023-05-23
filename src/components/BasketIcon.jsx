@@ -18,7 +18,8 @@ const BasketIcon = () => {
     return (
         <div className={`basket-quantity ${itemAdded ? 'item-placed' : ''}`}>
             <div className="basket-icon__container">
-                <img className="basket-icon" src="basket.svg"></img>
+                {/* <img className="basket-icon" src="basket.svg"></img> */}
+                <img className="basket-icon" src={`${import.meta.env.BASE_URL}basket.svg`}></img>
                 <div className="basket-icon__quantity">
                     <div>{totalQty}</div>
                 </div>
