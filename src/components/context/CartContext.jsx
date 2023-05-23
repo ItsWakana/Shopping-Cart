@@ -12,26 +12,7 @@ export const CartProvider = ({ children }) => {
         return acc + curr.qty;
     }, 0);
 
-    // const handleCartAdd = (product, desiredQty) => {
-    //     // console.log(`Product: ${product.name}`);
-    //     // console.log(`Quantity: ${desiredQty}`);
-    //     if (desiredQty < 1) return;
-    //     setItemAdded(true);
-    //     let hasProductInCart = false;
-    //     const updatedCart = cart.map((item) => {
-    //         if (item.id === product.id) {
-    //                 hasProductInCart = true;
-    //                 return { ...item, qty: item.qty + desiredQty };
-    //             }
-    //             return item;
-    //         });
-
-    //         if (hasProductInCart) {
-    //             setCart(updatedCart);
-    //         } else {
-    //             setCart([...cart, {...product, qty: desiredQty}]);
-    //         }
-    //     }
+    const totalPrice = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
 
     const handleQuantityChange = (quantity, productId) => {
         setItemAdded(true);
@@ -70,7 +51,7 @@ export const CartProvider = ({ children }) => {
 
     return (
         <CartContext.Provider value={{
-            cart, totalQty, handleCartAdd, itemAdded, setItemAdded, handleQuantityChange, removeCartItem
+            cart, totalQty, totalPrice, handleCartAdd, itemAdded, setItemAdded, handleQuantityChange, removeCartItem
         }}>
             {children}
         </CartContext.Provider>

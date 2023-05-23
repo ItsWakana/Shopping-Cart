@@ -29,7 +29,7 @@ const BasketItem = ({ item }) => {
                 <b>Product: </b>
                 {item.name}
                 <b> Price: </b>
-                £{item.price}.00
+                £{item.price}
                 <b> Quantity: </b>
                 <select name="qty" id={`qty-${item.id}`} onChange={handleEdit}value={qty}>
                     <option value="1">1</option>
@@ -39,7 +39,7 @@ const BasketItem = ({ item }) => {
                     <option value="5">5</option>
                 </select>
 
-                <img className="remove-icon" src="trash.svg" alt="bin-icon" onClick={() => removeCartItem(item.id)}/>
+                <img className="remove-icon" src="cross.svg" alt="bin-icon" onClick={() => removeCartItem(item.id)}/>
             </div>
         </div>
     )

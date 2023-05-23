@@ -34,14 +34,12 @@ function App() {
           </div>
 
         </nav>
-        <div className="content">
           
           <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/store" element={<Store />}/>
             <Route path="/basket" element={<ShoppingCart />}/>
           </Routes>
-        </div>
     </>
   )
 }

@@ -24,7 +24,7 @@ const Product = ({ product }) => {
             src={`/images/${product.name}.jpg`} 
             alt={product.name}></img>
 
-            <p>£{product.price}.00</p>
+            <p>£{product.price}</p>
             <div className="product__input-container">
                 <button className="add-basket-btn"
                 onClick={() => handleCartAdd(product)}>

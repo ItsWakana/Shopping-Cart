@@ -12,14 +12,14 @@ const Store = () => {
     },[]);
 
     return (
-        <>
-            <h1>Store</h1>
+        <section className="main-page store">
+        <h4 className="store__heading">Product List</h4>
             <div className="product-container">
                 {shopProducts.map((product) => (
                     <Product key={product.id} product={product}/>
                 ))}
             </div>
-        </>
+        </section>
 
     )
 }

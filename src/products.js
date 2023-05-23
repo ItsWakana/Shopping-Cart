@@ -1,10 +1,14 @@
 import uniqid from 'uniqid';
 
 const shopProducts = [
-    { id: uniqid(), name: 'Seiko Watch', price: 470.00 },
-    { id: uniqid(), name: 'Challenger Deep Watch', price: 1000.00 },
-    { id: uniqid(), name: 'Citizen Titanium Watch', price: 399.00 },
-    { id: uniqid(), name: 'Tissot Seastar Watch', price: 375.00 },
+    { id: uniqid(), name: 'Golden Axe', price: 16 },
+    { id: uniqid(), name: 'Altered Beast', price: 20 },
+    { id: uniqid(), name: 'Battletoads', price: 18 },
+    { id: uniqid(), name: 'Golden Axe II', price: 16 },
+    { id: uniqid(), name: 'Jurassic Park', price: 21 },
+    { id: uniqid(), name: 'Sonic the Hedgehog', price: 13 },
+    { id: uniqid(), name: 'Sonic the Hedgehog 2', price: 13 },
+    { id: uniqid(), name: 'Streets of Rage 3', price: 18 },
 ];
 
 export default shopProducts;
