@@ -29,12 +29,7 @@ const ShoppingCart = () => {
                     <button className="checkout-btn">CONTINUE TO CHECKOUT</button>
                     </div>
                 </div>
-                {/* <div className="total-container">
-                    <div className="total-container__info"></div>
-                    <BasketTotal />
-                </div> */}
                 </>
-                //seperate component which can appear next to the basket which includes our subtotal and order total. We can give the container a flex row while on desktop layout and a column layout for mobile.
                 ) : <div className="empty-cart-message"><i>YOUR BASKET IS CURRENTLY EMPTY</i></div>}
         </section>
     )
