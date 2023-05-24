@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import CartContext from "./context/CartContext";
+import NavigationContext from "./context/NavigationContext";
 
 const Product = ({ product }) => {
 
     const { handleCartAdd } = useContext(CartContext);
-
+    const { showBasketModal } = useContext(NavigationContext);
 
     return (
         <div key={product.id} className="product">
@@ -17,7 +18,8 @@ const Product = ({ product }) => {
             <p>£{product.price}</p>
             <div className="product__input-container">
                 <button className="add-basket-btn"
-                onClick={() => handleCartAdd(product)}>
+                onClick={() => {handleCartAdd(product);
+                                showBasketModal() }}>
                     Add to Cart
                 </button>
             </div>

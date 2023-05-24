@@ -1,9 +1,12 @@
 import { useContext, useEffect } from "react";
 import CartContext from "./context/CartContext";
+import NavigationContext from "./context/NavigationContext";
+import { Link } from "react-router-dom";
 
 const BasketIcon = () => {
 
     const { totalQty, itemAdded, setItemAdded } = useContext(CartContext);
+    const { toggleBasketModal } = useContext(NavigationContext);
 
     useEffect(() => {
         if (itemAdded) {
@@ -16,9 +19,8 @@ const BasketIcon = () => {
     },[itemAdded]);
     
     return (
-        <div className={`basket-quantity ${itemAdded ? 'item-placed' : ''}`}>
+        <div onClick={toggleBasketModal} className={`basket-quantity ${itemAdded ? 'item-placed' : ''}`}>
             <div className="basket-icon__container">
-                {/* <img className="basket-icon" src="basket.svg"></img> */}
                 <img className="basket-icon" src={`${import.meta.env.BASE_URL}basket.svg`}></img>
                 <div className="basket-icon__quantity">
                     <div>{totalQty}</div>

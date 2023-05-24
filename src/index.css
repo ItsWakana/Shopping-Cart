@@ -36,11 +36,10 @@ body {
   min-width: 320px;
   background-color: var(--site-bg-clr);
   height: 100vh;
+  position: relative;
   /* padding-top: 70px; */
 }
 
-.main-page {
-}
 .main-page.store,
 .main-page.basket {
   display: flex;
@@ -61,6 +60,26 @@ body {
   margin-top: 45px;
 }
 
+.cart-modal {
+  position: fixed;
+  opacity: 0;
+  /* width: 70%; */
+  height: 70%;
+  border: solid 1px var(--product-outline-clr);
+  background: white;
+  top: -400px;
+  top: 70px;
+  right: -250px;
+  z-index: 999;
+  transition:250ms ease-in-out;
+}
+
+.cart-modal.open {
+  opacity: 1;
+  right: 20px;
+  z-index: 999;
+}
+
 .total-container {
   text-align: end;
 }
@@ -77,8 +96,6 @@ body {
   background-size: cover;
   height: 100vh;
   width: 100%;
-  position: relative;
-
 }
 .slideshow,
 .homepage-photo {
@@ -100,7 +117,6 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-
 }
 
 .nav-bar {
@@ -111,7 +127,7 @@ body {
   left: 0;
   width: 100%;
   height: 70px;
-  z-index: 100;
+  z-index: 10;
   transition: 150ms ease-in;
   background-color: white;
   box-shadow: 0px 5px 13px -7px #000000;
@@ -142,6 +158,7 @@ body {
 }
 
 .basket-quantity {
+  cursor: pointer;
   transition: transform 50ms ease-in;
 }
 
@@ -155,9 +172,16 @@ body {
   filter: invert(10%) sepia(6%) saturate(190%) hue-rotate(131deg) brightness(94%) contrast(96%);
 }
 
-.remove-icon {
+.remove-icon,
+.close-modal-icon {
   width: 30px;
   cursor: pointer;
+}
+
+.close-modal-icon {
+  position: absolute;
+  left: 15px;
+  top: 7px;
 }
 
 .basket-icon__container {
@@ -193,12 +217,32 @@ body {
   outline: solid 1px var(--product-outline-clr);
 }
 
+.basket-container.modal {
+  min-width: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: scroll;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
 .basket__header {
   width: 100%;
 }
-.basket-container.has-items {
-}
-
 .basket-item {
   display: flex;
   align-items: center;
@@ -206,7 +250,6 @@ body {
   padding-bottom: 10px;
   border-bottom: 1px solid black;
   width: 100%;
-
 }
 
 .basket-item__photo {
@@ -220,6 +263,15 @@ body {
   width: 100%;
   /* border: solid 1px red; */
   font-size: 0.8rem;
+}
+
+.basket-item__details.modal {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.basket-item__details-rest.modal {
+  width: 100%;
 }
 
 .basket-item__details b {
