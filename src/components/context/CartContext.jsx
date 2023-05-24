@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, useMemo, createContext } from "react";
 
 const CartContext = createContext({});
 
@@ -8,11 +8,16 @@ export const CartProvider = ({ children }) => {
 
     const [itemAdded, setItemAdded] = useState(false);
 
-    const totalQty = cart.reduce((acc, curr) => {
-        return acc + curr.qty;
-    }, 0);
+    // const totalQty = cart.reduce((acc, curr) => {
+    //     return acc + curr.qty;
+    // }, 0);
 
-    const totalPrice = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+    const totalQty = useMemo(() => cart.reduce((acc, curr) => {
+        return acc + curr.qty;
+    }, 0),[cart]);
+
+    // const totalPrice = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+    const totalPrice = useMemo(() => cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0),[cart]);
 
     const handleQuantityChange = (quantity, productId) => {
         setItemAdded(true);
