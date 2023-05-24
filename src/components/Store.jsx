@@ -21,6 +21,7 @@ const Store = () => {
             </div>
         </section>
 
+        //Instead of mapping over the products here, we could create a ProductList component that does some kind of checks while iterating over the products and if we go over say 8 products it creates a new page for us to view more products.
     )
 }
 
