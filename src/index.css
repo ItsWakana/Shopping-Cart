@@ -68,7 +68,8 @@ body {
   border: solid 1px var(--product-outline-clr);
   background: white;
   top: -400px;
-  top: 70px;
+  /* top: 70px; */
+  top: 90px;
   right: -250px;
   z-index: 999;
   transition:250ms ease-in-out;
@@ -76,8 +77,31 @@ body {
 
 .cart-modal.open {
   opacity: 1;
-  right: 20px;
+  right: 17px;
   z-index: 999;
+}
+
+.cart-modal::before {
+  content: '';
+  position: absolute;
+  top: -32px;
+  right: 20px;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid var(--product-outline-clr);
+  transform: rotate(180deg);
+  z-index: -1;
+}
+
+.cart-modal::after {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: 20px;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid white;
+  transform: rotate(180deg);
 }
 
 .total-container {
