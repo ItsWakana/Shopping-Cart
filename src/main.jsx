@@ -4,16 +4,18 @@ import App from './App.jsx'
 import './index.css'
 import { CartProvider } from './components/context/CartContext.jsx';
 import { NavigationProvider } from "./components/context/NavigationContext";
-// import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from './components/context/ThemeContext.jsx';
 import { HashRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <NavigationProvider>
       <CartProvider>
-        <HashRouter>
-          <App />
-        </HashRouter>
+        <ThemeProvider>
+          <HashRouter>
+            <App />
+          </HashRouter>
+        </ThemeProvider>
       </CartProvider>
     </NavigationProvider>
   </React.StrictMode>,
