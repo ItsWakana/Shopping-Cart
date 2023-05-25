@@ -4,13 +4,14 @@ import Store from "./components/Store";
 import ShoppingCart from "./components/ShoppingCart";
 import CartModal from "./components/modals/CartModal";
 import Navbar from "./components/NavBar";
-
+import ErrorModal from "./components/ErrorModal";
 function App() {
   
   return (
     <>
         <Navbar />
         <CartModal />
+        <ErrorModal />
           <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/store" element={<Store />}/>

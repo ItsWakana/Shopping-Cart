@@ -8,6 +8,9 @@ export const CartProvider = ({ children }) => {
 
     const [itemAdded, setItemAdded] = useState(false);
 
+    // const [maxItemQuantityErr, setMaxItemQuantityErr] = useState(false);
+    const [cartError, setCartError] = useState('');
+
     useEffect(() => {
         const localStorageData = JSON.parse(localStorage.getItem('cart'));
 
@@ -61,33 +64,12 @@ export const CartProvider = ({ children }) => {
     const handleCartAdd = (product) => {
         setItemAdded(true);
 
-        console.log(cart);
-        // setCart((cart) => 
-        //     cart.every((item) => item.id !== product.id)
-        //         ? [...cart, { ...product, qty: 1 }]
-        //         : cart.map((item) =>
-        //                 item.id === product.id ? { ...item, qty: item.qty + 1 } : item,
-        //                 ),
-        // );
-
-        // setCart((cart) => 
-        //     cart.every((item) => item.id !== product.id) 
-        //         ? [...cart, {...product, qty: 1}]
-        //         : cart.map((item) => {
-        //             if (item.qty === 5) {
-        //                 return item; 
-        //             }
-        //             if (item.id === product.id) {
-        //                 return {...item, qty: item.qty + 1}
-        //             } else {
-        //                 return item;
-        //             }
-        //         }));
-
         setCart((cart) => {
             const updatedCart = cart.every((item) => item.id !== product.id) ? [...cart, {...product, qty: 1}]
                 : cart.map((item) => {
                     if (item.qty === 5) {
+                        // handleMaxItemQuantityError();
+                        setCartError("You can't add more of this item!");
                         return item;
                     }
                     if (item.id === product.id) {
@@ -103,9 +85,14 @@ export const CartProvider = ({ children }) => {
         });
     };
 
+    const resetError = () => {
+        setCartError('');
+    }
+
+
     return (
         <CartContext.Provider value={{
-            cart, totalQty, totalPrice, handleCartAdd, itemAdded, setItemAdded, handleQuantityChange, removeCartItem
+            cart, totalQty, totalPrice, handleCartAdd, itemAdded, setItemAdded, handleQuantityChange, removeCartItem, cartError, setCartError, resetError
         }}>
             {children}
         </CartContext.Provider>
