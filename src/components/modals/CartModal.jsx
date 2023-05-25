@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import NavigationContext from "../context/NavigationContext";
 import CartContext from "../context/CartContext";
-import BasketItem from "../BasketItem";
+// import BasketItem from "../BasketItem";
+import CartModalItem from "../CartModalItem";
 import BasketTotal from "../BasketTotal";
 import { Link } from "react-router-dom";
 
@@ -19,7 +20,7 @@ const CartModal = () => {
                     onClick={hideBasketModal}/>
                     <h4 className="basket__header">Your Basket</h4>
                     {cart.map((item) => (
-                        <BasketItem key={item.id} item={item}/>
+                        <CartModalItem key={item.id} item={item}/>
                     ))}
                     <div className="total-container">
                         <div className="total-container__info"></div>
