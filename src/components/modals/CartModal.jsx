@@ -13,7 +13,7 @@ const CartModal = () => {
         <div className={`cart-modal ${showBasket ? 'open' : ''}`}>
             {cart.length ? (
                 <>
-                <div className={`basket-container modal ${cart.length > 0 ? 'has-items' : ''}`}>
+                <div className={`basket-container modal`}>
                     <img src={`${import.meta.env.BASE_URL}arrow-hide.svg`}
                     className="close-modal-icon" alt="right-arrow" 
                     onClick={hideBasketModal}/>

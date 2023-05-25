@@ -60,6 +60,8 @@ export const CartProvider = ({ children }) => {
 
     const handleCartAdd = (product) => {
         setItemAdded(true);
+
+        console.log(cart);
         // setCart((cart) => 
         //     cart.every((item) => item.id !== product.id)
         //         ? [...cart, { ...product, qty: 1 }]

@@ -11,11 +11,16 @@ const Store = () => {
         hideMobileMenu(false);
     },[]);
 
+    let localProducts = JSON.parse(localStorage.getItem('products'));
+
+    if (!localProducts) {
+        localProducts = localStorage.setItem('products', JSON.stringify(shopProducts));
+    }
     return (
         <section className="main-page store">
         <h4 className="store__heading">Product List</h4>
             <div className="product-container">
-                {shopProducts.map((product) => (
+                {localProducts.map((product) => (
                     <Product key={product.id} product={product}/>
                 ))}
             </div>

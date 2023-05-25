@@ -18,7 +18,7 @@ const ShoppingCart = () => {
         <section className="main-page basket">
             {cart.length ? (
                 <>
-                <div className={`basket-container ${cart.length > 0 ? 'has-items' : ''}`}>
+                <div className={`basket-container`}>
                 <h4 className="basket__header">Your Basket</h4>
                     {cart.map((item) => (
                         <BasketItem key={item.id} item={item}/>

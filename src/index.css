@@ -3,6 +3,8 @@
   line-height: 1.5;
   font-weight: 400;
 
+  background-color: var(--primary-color);
+
   --primary-color: rgb(245, 245, 245); 
   --secondary-color: #1b1c1c;
   --third-color: white;
@@ -59,14 +61,14 @@ body {
 .main-page.store {
   flex-direction: column;
   align-items: center;
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
 }
 
 .main-page.basket {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
   margin-top: 45px;
 }
 
