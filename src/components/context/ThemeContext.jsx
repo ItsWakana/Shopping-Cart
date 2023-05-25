@@ -6,13 +6,13 @@ export const ThemeProvider = ({ children }) => {
 
     const [darkTheme, setDarkTheme] = useState(false);
 
-    const toggleDarkMode = () => {
+    const toggleDarkTheme = () => {
         setDarkTheme((prevTheme) => !prevTheme);
     };
 
     return (
         <ThemeContext.Provider value={{
-            darkTheme, toggleDarkMode
+            darkTheme, toggleDarkTheme
         }}>
             {children}
         </ThemeContext.Provider>

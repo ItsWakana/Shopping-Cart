@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import CartContext from "./context/CartContext";
 import NavigationContext from "./context/NavigationContext";
-import { Link } from "react-router-dom";
 
 const BasketIcon = () => {
 
