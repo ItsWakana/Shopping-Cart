@@ -593,14 +593,3 @@ button:focus-visible {
     --icon-color: invert(100%) sepia(0%) saturate(7426%) hue-rotate(11deg) brightness(120%) contrast(116%);
   }
 }
-
-@media (prefers-color-scheme: light) {
- :root {
-  --primary-color: rgb(245, 245, 245); 
-  --secondary-color: #1b1c1c;
-  --third-color: white;
-  --button-color: white;
-  --outline-color: rgb(233, 233, 233);
-  --icon-color: invert(10%) sepia(6%) saturate(190%) hue-rotate(131deg) brightness(94%) contrast(96%);
- } 
-}
