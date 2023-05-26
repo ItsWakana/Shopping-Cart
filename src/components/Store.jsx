@@ -20,7 +20,8 @@ const Store = () => {
         <h4 className="store__heading">Product List</h4>
             <div className="product-container">
                 {localProducts.map((product) => (
-                    <Product key={product.id} product={product}/>
+                    <Product key={product.id} product={product}
+                    data-testid="product-component"/>
                 ))}
             </div>
         </section>
