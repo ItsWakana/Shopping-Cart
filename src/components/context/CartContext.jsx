@@ -69,7 +69,7 @@ export const CartProvider = ({ children }) => {
                 : cart.map((item) => {
                     if (item.qty === 5) {
                         // handleMaxItemQuantityError();
-                        setCartError("You can't add more of this item!");
+                        setCartError("Max quantity reached!");
                         return item;
                     }
                     if (item.id === product.id) {

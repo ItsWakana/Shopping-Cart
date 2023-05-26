@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import CartContext from "./context/CartContext";
 import NavigationContext from "./context/NavigationContext";
-
+import ErrorModal from "./ErrorModal";
 const Product = ({ product }) => {
 
     const { handleCartAdd } = useContext(CartContext);

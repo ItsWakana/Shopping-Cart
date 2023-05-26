@@ -10,6 +10,7 @@
   --third-color: white;
   --button-color: white;
   --outline-color: rgb(233, 233, 233);
+  --error-color: rgb(233, 103, 103);
   --icon-color: invert(10%) sepia(6%) saturate(190%) hue-rotate(131deg) brightness(94%) contrast(96%);
   
   font-synthesis: none;
@@ -25,6 +26,7 @@
   --third-color: black;
   --button-color: white;
   --outline-color: #363636;
+  --error-color: rgb(233, 103, 103);
   --icon-color: invert(100%) sepia(0%) saturate(7426%) hue-rotate(11deg) brightness(120%) contrast(116%);
 }
 
@@ -75,20 +77,23 @@ body {
 .error-modal {
   opacity: 0;
   transform: scale(0);
-  position: absolute;
+  position: fixed;
   font-weight: bold;
+  font-size: 0.9rem;
   right: 170px;
-  top: 45px;
+  top: 20px;
   z-index: 1000;
-  background-color: var(--third-color);
-  border-radius: 3px;
-  color: var(--secondary-color);
+  background-color: var(--error-color);
+  border-radius: 10px;
+
+  /* border-radius: 5px; */
+  color: var(--primary-color);
   border: solid 1px var(--outline-color);
   padding: 7px 25px;
-  transition: all 250ms ease-in-out;
+  transition: all 200ms;
 }
 
-.error-modal::before {
+/* .error-modal::before {
   content: '';
   position: absolute;
   top: 4px;
@@ -108,7 +113,7 @@ body {
   border-right: 15px solid transparent;
   border-top: 30px solid var(--third-color);
   transform: rotate(-90deg);
-}
+} */
 
 .error-modal.active {
   opacity: 1;
@@ -273,11 +278,15 @@ body {
 }
 
 
-.empty-cart-message {
+.empty-cart-message,
+.empty-cart__modal-message {
   padding: 7px 20px;
   border-radius: 5px;
   background-color: rgb(252, 246, 199);
+  color: black;
 }
+
+
 
 .checkout-btn {
   color: var(--button-color);
@@ -343,7 +352,7 @@ body {
   justify-content: center;
   align-items: flex-end;
   border-radius: 7px;
-  padding: 20px;
+  padding: 15px;
   gap: 30px;
   background-color: var(--third-color);
   outline: solid 1px var(--outline-color);
@@ -357,6 +366,10 @@ body {
   overflow: scroll;
   justify-content: flex-start;
   gap: 15px;
+}
+
+.basket-container.modal.empty {
+  align-items: center;
 }
 
 ::-webkit-scrollbar {
@@ -491,10 +504,10 @@ body {
   border-radius: 5px;
 }
 
-.product__input-container > .product__quantity-input {
+/* .product__input-container > .product__quantity-input {
   width: 40px;
   height: 30px;
-}
+} */
 
 h1 {
   font-size: 3.2em;

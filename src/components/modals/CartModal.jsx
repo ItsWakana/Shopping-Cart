@@ -31,7 +31,13 @@ const CartModal = () => {
                     </div>
                 </div>
                 </>
-                ) : <div className="empty-cart-message"><i>YOUR BASKET IS CURRENTLY EMPTY</i></div>}
+                ) : 
+                <div className={`basket-container modal empty`}>
+                    <div className="empty-cart__modal-message"><i>YOUR BASKET IS EMPTY</i></div>
+                    <Link to="/store">
+                        <button onClick={hideBasketModal}className="checkout-btn">GO TO STORE</button>
+                    </Link>
+                </div>}
         </div>
     )
 }
