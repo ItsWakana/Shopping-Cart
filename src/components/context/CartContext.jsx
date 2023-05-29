@@ -63,12 +63,11 @@ export const CartProvider = ({ children }) => {
 
     const handleCartAdd = (product) => {
         setItemAdded(true);
-
+        console.log(product);
         setCart((cart) => {
             const updatedCart = cart.every((item) => item.id !== product.id) ? [...cart, {...product, qty: 1}]
                 : cart.map((item) => {
-                    if (item.qty === 5) {
-                        // handleMaxItemQuantityError();
+                    if (item.id === product.id && item.qty === 5) {
                         setCartError("Max quantity reached!");
                         return item;
                     }
