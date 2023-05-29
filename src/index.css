@@ -62,8 +62,30 @@ body {
 
 .main-page.store {
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   /* background-color: var(--primary-color); */
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 3px;
+}
+
+.pagination-container__item {
+  background-color: var(--third-color);
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: solid 1px var(--outline-color);
+  list-style-type: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.pagination-container__item:hover {
+  background-color: var(--primary-color);
 }
 
 .main-page.basket {
@@ -92,28 +114,6 @@ body {
   padding: 7px 25px;
   transition: all 200ms;
 }
-
-/* .error-modal::before {
-  content: '';
-  position: absolute;
-  top: 4px;
-  right: -36px;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 30px solid var(--outline-color);
-  transform: rotate(-90deg);
-  z-index: -1;
-}
-.error-modal::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  right: -34px;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 30px solid var(--third-color);
-  transform: rotate(-90deg);
-} */
 
 .error-modal.active {
   opacity: 1;
