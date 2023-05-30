@@ -6,13 +6,12 @@ const Product = ({ product }) => {
 
     const { handleCartAdd } = useContext(CartContext);
     const { showBasketModal } = useContext(NavigationContext);
-
     return (
         <div key={product.id} className="product">
             <h4 className="product__heading">{product.name}</h4>
             
             <img className="product__photo"
-            src={`${import.meta.env.BASE_URL}images/${product.name}.jpg`} 
+            src={`${import.meta.env.BASE_URL}images/${product.console.toLowerCase()}/${product.name}.jpg`} 
             alt={product.name}></img>
 
             <p>£{product.price}</p>

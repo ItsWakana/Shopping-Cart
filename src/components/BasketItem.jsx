@@ -2,7 +2,7 @@ import { useContext } from "react";
 import CartContext from "./context/CartContext";
 
 const BasketItem = ({ item }) => {
-
+    console.log(item.console);
     const { handleQuantityChange, removeCartItem } = useContext(CartContext);
 
     const handleEdit = (e) => {
@@ -14,7 +14,7 @@ const BasketItem = ({ item }) => {
     }
     return (
         <div className="basket-item" key={item.id}>
-            <img className="basket-item__photo" src={`${import.meta.env.BASE_URL}images/${item.name}.jpg`} alt={item.name} />
+            <img className="basket-item__photo" src={`${import.meta.env.BASE_URL}images/${item.console.toLowerCase()}/${item.name}.jpg`} alt={item.name} />
             {/* <div className="basket-item__details"> */}
             <div className={`basket-item__details`}>
                 <div className="basket-item__details-name">

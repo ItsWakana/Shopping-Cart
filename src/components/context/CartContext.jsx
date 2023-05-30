@@ -62,8 +62,8 @@ export const CartProvider = ({ children }) => {
     }
 
     const handleCartAdd = (product) => {
-        setItemAdded(true);
         console.log(product);
+        setItemAdded(true);
         setCart((cart) => {
             const updatedCart = cart.every((item) => item.id !== product.id) ? [...cart, {...product, qty: 1}]
                 : cart.map((item) => {

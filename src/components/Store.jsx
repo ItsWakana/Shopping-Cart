@@ -17,8 +17,8 @@ const Store = () => {
         <section className="main-page store">
             <h4 className="store__heading">Product List</h4>
             <div className="console-selector">
-                {consoleOptions.map((console) => (
-                    <button onClick={() => filterProducts(console)} className={`console-selector__item ${selectedConsole === console ? 'active' : ''}`}>{console}</button>
+                {consoleOptions.map((console, i) => (
+                    <button key={i} onClick={() => filterProducts(console)} className={`console-selector__item ${selectedConsole === console ? 'active' : ''}`}>{console}</button>
                 ))}
             </div>
             <div className="product-container">

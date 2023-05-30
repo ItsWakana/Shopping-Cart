@@ -15,7 +15,7 @@ const CartModalItem = ({ item }) => {
     }
     return (
         <div className="cart-item" key={item.id}>
-            <img className="cart-item__photo" src={`${import.meta.env.BASE_URL}images/${item.name}.jpg`} alt={item.name} />
+            <img className="cart-item__photo" src={`${import.meta.env.BASE_URL}images/${item.console.toLowerCase()}/${item.name}.jpg`} alt={item.name} />
             {/* <div className="basket-item__details"> */}
             <div className={`cart-item__details`}>
                 <div className="cart-item__details-name">

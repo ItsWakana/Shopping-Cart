@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo, useEffect } from "react";
 import { StoreContext } from "./context/StoreContext";
 
 const Pagination = () => {
@@ -9,14 +9,32 @@ const Pagination = () => {
         setPagination,
         setPrevPage,
         setNextPage,
-        currentPage
+        currentPage,
+        selectedProducts
     } = useContext(StoreContext);
     
     const pageNumbers = [];
-
-    for (let i=1; i<= Math.ceil(localProducts.length / postsPerPage); i++) {
+    // useEffect(() => {
+    //         console.log(selectedProducts);
+    //         for (let i=1; i<= Math.ceil(selectedProducts.length  / postsPerPage); i++) {
+    //             pageNumbers.push(i);
+    //         }
+    // }, [selectedProducts]);
+    for (let i=1; i<= Math.ceil(selectedProducts.length  / postsPerPage); i++) {
         pageNumbers.push(i);
     }
+
+    // for (let i=1; i<= Math.ceil(localProducts.length / postsPerPage); i++) {
+    //     pageNumbers.push(i);
+    // }
+
+    // const pageNumbers = useMemo(() => {
+    //     const numbers = [];
+    //     for (let i = 1; i <= Math.ceil(localProducts.length / postsPerPage); i++) {
+    //       numbers.push(i);
+    //     }
+    //     return numbers;
+    //   }, [currentPosts]);
 
     return (
         <div className="pagination-container">
