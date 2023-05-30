@@ -74,7 +74,9 @@ body {
   gap: 3px;
 }
 
-.pagination-container__item {
+.pagination-container__item,
+.pagination-container__item-prev,
+.pagination-container__item-next {
   background-color: var(--third-color);
   padding: 5px 10px;
   border-radius: 4px;

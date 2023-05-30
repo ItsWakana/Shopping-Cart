@@ -22,10 +22,18 @@ const StoreProvider = ({ children }) => {
         setCurrentPage(pageNumber);
     }
 
+    const setNextPage = () => {
+        setCurrentPage((page) => page + 1);
+    }
+
+    const setPrevPage = () => {
+        setCurrentPage((page) => page - 1);
+    }
+
     return (
         <StoreContext.Provider value={{
             setPagination, localProducts, currentPosts,
-            postsPerPage, 
+            postsPerPage, setNextPage, setPrevPage, currentPage
         }}>
             {children}
         </StoreContext.Provider>

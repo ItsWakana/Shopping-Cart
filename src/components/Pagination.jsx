@@ -6,7 +6,10 @@ const Pagination = () => {
     const {
         postsPerPage,
         localProducts,
-        setPagination
+        setPagination,
+        setPrevPage,
+        setNextPage,
+        currentPage
     } = useContext(StoreContext);
     
     const pageNumbers = [];
@@ -17,12 +20,15 @@ const Pagination = () => {
 
     return (
         <div className="pagination-container">
+            <button onClick={setPrevPage} disabled={currentPage === 1}className="pagination-container__item-prev">{'<'}</button>
             {pageNumbers.map((number) => (
                 <div key={number} className="pagination-container__item"
                 onClick={() => setPagination(number)} >
                     {number}
                 </div>
             ))}
+
+            <button onClick={setNextPage} disabled={currentPage === pageNumbers.length}className="pagination-container__item-next">{'>'}</button>
         </div>
     )
 }
