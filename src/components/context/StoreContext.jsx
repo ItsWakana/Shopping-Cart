@@ -6,7 +6,7 @@ export const StoreContext = createContext({});
 const StoreProvider = ({ children }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(2);
+    const [postsPerPage] = useState(3);
     let localProducts = JSON.parse(localStorage.getItem('products'));
     
     if (!localProducts) {
@@ -26,7 +26,7 @@ const StoreProvider = ({ children }) => {
     const filterProducts = (console) => {
         setSelectedConsole(console);
 
-        setSelectedProducts(localProducts.filter((product) => product.console === console));
+        setSelectedProducts(localProducts.filter((product) => product.gameConsole === console));
     }
 
     const setPagination = (pageNumber) => {

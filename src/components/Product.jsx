@@ -7,8 +7,7 @@ const Product = ({ product }) => {
     const { handleCartAdd } = useContext(CartContext);
     const { showBasketModal } = useContext(NavigationContext);
 
-    const lowerCaseSubfolder = product.console.toLowerCase();
-    const imageUrl = `${import.meta.env.BASE_URL}images/${lowerCaseSubfolder}/${product.name}.jpg`;
+    const imageUrl = `${import.meta.env.BASE_URL}images/${product.gameConsole.toLowerCase()}/${product.name}.jpg`;
     return (
         <div key={product.id} className="product">
             <h4 className="product__heading">{product.name}</h4>

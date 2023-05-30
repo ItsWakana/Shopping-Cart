@@ -13,9 +13,9 @@ const CartModalItem = ({ item }) => {
         const newQuantity = parseInt(e.target.value);
         handleQuantityChange(newQuantity, item.id);
     }
-    const lowerCaseSubfolder = item.console.toLowerCase();
-    const imageUrl = `${import.meta.env.BASE_URL}images/${lowerCaseSubfolder}/${item.name}.jpg`;
     
+    const imageUrl = `${import.meta.env.BASE_URL}images/${item.gameConsole.toLowerCase()}/${item.name}.jpg`;
+
     return (
         <div className="cart-item" key={item.id}>
             <img className="cart-item__photo" src={imageUrl} alt={item.name} />
