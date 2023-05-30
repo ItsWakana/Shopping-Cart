@@ -8,25 +8,26 @@ const Store = () => {
 
     const { hideMobileMenu } = useContext(NavigationContext);
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(5);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [postsPerPage] = useState(5);
 
     useEffect(() => {
         hideMobileMenu(false);
     },[]);
 
-    let localProducts = JSON.parse(localStorage.getItem('products'));
+    // let localProducts = JSON.parse(localStorage.getItem('products'));
 
-    if (!localProducts) {
-        localProducts = localStorage.setItem('products', JSON.stringify(shopProducts));
-    }
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = localProducts.slice(indexOfFirstPost, indexOfLastPost);
+    // if (!localProducts) {
+    //     localProducts = localStorage.setItem('products', JSON.stringify(shopProducts));
+    // }
 
-    const setPagination = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    }
+    // const indexOfLastPost = currentPage * postsPerPage;
+    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    // const currentPosts = localProducts.slice(indexOfFirstPost, indexOfLastPost);
+
+    // const setPagination = (pageNumber) => {
+    //     setCurrentPage(pageNumber);
+    // }
     return (
         <section className="main-page store">
         <h4 className="store__heading">Product List</h4>
@@ -39,8 +40,6 @@ const Store = () => {
             <Pagination postsPerPage={postsPerPage} totalPosts={localProducts.length}
             setPagination={setPagination}/>
         </section>
-
-        //Instead of mapping over the products here, we could create a ProductList component that does some kind of checks while iterating over the products and if we go over say 8 products it creates a new page for us to view more products.
     )
 }
 
