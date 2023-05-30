@@ -12,9 +12,13 @@ const BasketItem = ({ item }) => {
 
         handleQuantityChange(newQuantity, item.id);
     }
+
+    const lowerCaseSubfolder = item.console.toLowerCase();
+    const imageUrl = `${import.meta.env.BASE_URL}images/${lowerCaseSubfolder}/${item.name}.jpg`;
+
     return (
         <div className="basket-item" key={item.id}>
-            <img className="basket-item__photo" src={`${import.meta.env.BASE_URL}images/${item.console.toLowerCase()}/${item.name}.jpg`} alt={item.name} />
+            <img className="basket-item__photo" src={imageUrl} alt={item.name} />
             {/* <div className="basket-item__details"> */}
             <div className={`basket-item__details`}>
                 <div className="basket-item__details-name">

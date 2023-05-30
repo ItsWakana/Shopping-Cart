@@ -6,12 +6,15 @@ const Product = ({ product }) => {
 
     const { handleCartAdd } = useContext(CartContext);
     const { showBasketModal } = useContext(NavigationContext);
+
+    const lowerCaseSubfolder = product.console.toLowerCase();
+    const imageUrl = `${import.meta.env.BASE_URL}images/${lowerCaseSubfolder}/${product.name}.jpg`;
     return (
         <div key={product.id} className="product">
             <h4 className="product__heading">{product.name}</h4>
             
             <img className="product__photo"
-            src={`${import.meta.env.BASE_URL}images/${product.console.toLowerCase()}/${product.name}.jpg`} 
+            src={imageUrl} 
             alt={product.name}></img>
 
             <p>£{product.price}</p>
