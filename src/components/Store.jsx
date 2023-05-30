@@ -1,33 +1,18 @@
-import shopProducts from "../products";
 import Product from "./Product";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import NavigationContext from "./context/NavigationContext";
+import { StoreContext } from "./context/StoreContext";
 import Pagination from "./Pagination";
-
 const Store = () => {
 
     const { hideMobileMenu } = useContext(NavigationContext);
 
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [postsPerPage] = useState(5);
+    const { currentPosts } = useContext(StoreContext);
 
     useEffect(() => {
         hideMobileMenu(false);
     },[]);
 
-    // let localProducts = JSON.parse(localStorage.getItem('products'));
-
-    // if (!localProducts) {
-    //     localProducts = localStorage.setItem('products', JSON.stringify(shopProducts));
-    // }
-
-    // const indexOfLastPost = currentPage * postsPerPage;
-    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    // const currentPosts = localProducts.slice(indexOfFirstPost, indexOfLastPost);
-
-    // const setPagination = (pageNumber) => {
-    //     setCurrentPage(pageNumber);
-    // }
     return (
         <section className="main-page store">
         <h4 className="store__heading">Product List</h4>
@@ -37,8 +22,7 @@ const Store = () => {
                     data-testid="product-component"/>
                 ))}
             </div>
-            <Pagination postsPerPage={postsPerPage} totalPosts={localProducts.length}
-            setPagination={setPagination}/>
+            <Pagination/>
         </section>
     )
 }

@@ -1,8 +1,17 @@
-const Pagination = ({ postsPerPage, totalPosts, setPagination }) => {
+import { useContext } from "react";
+import { StoreContext } from "./context/StoreContext";
 
+const Pagination = () => {
+
+    const {
+        postsPerPage,
+        localProducts,
+        setPagination
+    } = useContext(StoreContext);
+    
     const pageNumbers = [];
 
-    for(let i=1; i<= Math.ceil(totalPosts / postsPerPage); i++) {
+    for (let i=1; i<= Math.ceil(localProducts.length / postsPerPage); i++) {
         pageNumbers.push(i);
     }
 

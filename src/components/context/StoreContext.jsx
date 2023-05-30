@@ -6,7 +6,7 @@ export const StoreContext = createContext({});
 const StoreProvider = ({ children }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(5);
+    const [postsPerPage] = useState(2);
 
     let localProducts = JSON.parse(localStorage.getItem('products'));
 

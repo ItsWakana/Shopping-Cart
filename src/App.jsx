@@ -5,6 +5,8 @@ import ShoppingCart from "./components/ShoppingCart";
 import CartModal from "./components/modals/CartModal";
 import Navbar from "./components/NavBar";
 import ErrorModal from "./components/ErrorModal";
+import StoreProvider from "./components/context/StoreContext";
+
 function App() {
   
   return (
@@ -14,7 +16,11 @@ function App() {
         <ErrorModal />
           <Routes>
             <Route path="/" element={<Home />}/>
-            <Route path="/store" element={<Store />}/>
+            <Route path="/store" element={
+              <StoreProvider>
+                <Store />
+              </StoreProvider>
+            }/>
             <Route path="/basket" element={<ShoppingCart />}/>
           </Routes>
     </>
