@@ -7,16 +7,30 @@ const StoreProvider = ({ children }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(2);
-
     let localProducts = JSON.parse(localStorage.getItem('products'));
-
+    
     if (!localProducts) {
         localProducts = localStorage.setItem('products', JSON.stringify(shopProducts));
     }
 
+    const [selectedConsole, setSelectedConsole] = useState(null);
+
+    const [selectedProducts, setSelectedProducts] = useState(localProducts);
+    
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = localProducts.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = selectedProducts.slice(indexOfFirstPost, indexOfLastPost);
+
+    const consoleOptions = ['Mega Drive', 'Gamecube', 'Dreamcast'];
+
+    const filterProducts = (console) => {
+        setSelectedConsole(console);
+
+        setSelectedProducts(() => {
+            return localProducts.filter((product) => product.console === console);
+
+        });
+    }
 
     const setPagination = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -33,7 +47,8 @@ const StoreProvider = ({ children }) => {
     return (
         <StoreContext.Provider value={{
             setPagination, localProducts, currentPosts,
-            postsPerPage, setNextPage, setPrevPage, currentPage
+            postsPerPage, setNextPage, setPrevPage, currentPage,
+            filterProducts, selectedConsole, consoleOptions
         }}>
             {children}
         </StoreContext.Provider>

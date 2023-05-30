@@ -64,6 +64,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   /* background-color: var(--primary-color); */
 }
 
@@ -84,11 +85,14 @@ body {
   list-style-type: none;
   user-select: none;
   cursor: pointer;
+  color: var(--secondary-color);
 }
 
 .pagination-container__item:hover {
   background-color: var(--primary-color);
 }
+
+
 
 .main-page.basket {
   flex-direction: column;
@@ -457,15 +461,34 @@ body {
   width: 50%;
 }
 
-
 .product-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 25px;
   max-width: 700px;
-  /* border: solid 1px purple; */
+  position: relative;
 }
+
+.console-selector {
+  display: flex;
+  font-size: 0.8rem;
+  border: solid 1px var(--outline-color);
+  border-radius: 6px;
+  background-color: var(--primary-color);
+
+}
+
+.console-selector__item {
+  background: none;
+  transition: 150ms ease-in-out;
+  color: var(--secondary-color);
+}
+
+.console-selector__item.active {
+  background-color: var(--third-color);
+}
+
 .product {
   display: flex;
   flex-direction: column;
@@ -547,7 +570,8 @@ button {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  /* outline: 4px auto -webkit-focus-ring-color; */
+  /* background-color: var(--third-color); */
 }
 
 .hamburger-container {

@@ -7,7 +7,7 @@ const Store = () => {
 
     const { hideMobileMenu } = useContext(NavigationContext);
 
-    const { currentPosts } = useContext(StoreContext);
+    const { currentPosts, localProducts, filterProducts, selectedProducts, consoleOptions, selectedConsole } = useContext(StoreContext);
 
     useEffect(() => {
         hideMobileMenu(false);
@@ -15,7 +15,12 @@ const Store = () => {
 
     return (
         <section className="main-page store">
-        <h4 className="store__heading">Product List</h4>
+            <h4 className="store__heading">Product List</h4>
+            <div className="console-selector">
+                {consoleOptions.map((console) => (
+                    <button onClick={() => filterProducts(console)} className={`console-selector__item ${selectedConsole === console ? 'active' : ''}`}>{console}</button>
+                ))}
+            </div>
             <div className="product-container">
                 {currentPosts.map((product) => (
                     <Product key={product.id} product={product}
