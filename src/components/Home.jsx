@@ -1,7 +1,5 @@
 import { useEffect, useContext } from "react";
 import NavigationContext from "./context/NavigationContext";
-// import ImageGallery from "./ImageGallery";
-// import DemoCarousel from "./DemoCarousel";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -12,8 +10,9 @@ const Home = () => {
         hideMobileMenu(false);
     },[]);
     return (
-        // <DemoCarousel />
-        <section className="main-page home">
+        <section className="main-page home" style={
+            {backgroundImage: 'url(images/casino-background.gif)'}
+        }>
             <Link to="/store">
                 <button className="store-btn">SHOP NOW</button>
             </Link>

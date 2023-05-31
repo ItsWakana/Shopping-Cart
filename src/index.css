@@ -203,7 +203,7 @@ body {
 
 .main-page.home {
   position: relative;
-  background-image: url("https://cdn.vox-cdn.com/thumbor/2wVm9ndh9hcoBHoYnAAjetHjmes=/0x146:2040x1214/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/20104211/jbareham_200721_1032_pstar_0001.jpg");
+  /* background-image: url("https://64.media.tumblr.com/eb3bdd1826c1fb6e30632e201ffd1adb/tumblr_no896a0dpU1u6jjy9o1_640.gif"); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -225,6 +225,8 @@ body {
   bottom: 100px;
   outline: solid 1px var(--outline-color);
   outline-offset: 3px;
+  background-color: var(--third-color);
+  color: var(--secondary-color);
   transition: 100ms ease-in;
 }
 
