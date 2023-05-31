@@ -146,7 +146,7 @@ body {
 }
 
 .cart-modal__overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
@@ -283,7 +283,7 @@ body {
 }
 
 .checkbox-label .ball {
-  background-color: var(--primary-color);
+  background-color: var(--third-color);
   width: 22px;
   height: 22px;
   position: absolute;
@@ -559,14 +559,13 @@ body {
 
 .product__photo {
   width: 120px;
+  height: auto;
   margin: 20px;
   border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  /* transition: transform 0.3s ease; */
 }
-
-/* .product__input-container > .product__quantity-input {
-  width: 40px;
-  height: 30px;
-} */
 
 h1 {
   font-size: 3.2em;

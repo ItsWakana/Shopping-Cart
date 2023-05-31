@@ -11,7 +11,7 @@ const Home = () => {
     },[]);
     return (
         <section className="main-page home" style={
-            {backgroundImage: 'url(images/casino-background.gif)'}
+            {backgroundImage: `url(${import.meta.env.BASE_URL}images/casino-background.gif)`}
         }>
             <Link to="/store">
                 <button className="store-btn">SHOP NOW</button>

@@ -19,7 +19,10 @@ const shopProducts = [
     { id: uniqid(), name: 'Sonic Adventure', gameConsole: 'Dreamcast', price: 20 },
     { id: uniqid(), name: 'Soul Calibur', gameConsole: 'Dreamcast', price: 20 },
     { id: uniqid(), name: 'Street Fighter 3: 3rd Strike', gameConsole: 'Dreamcast', price: 20 },
-
+    { id: uniqid(), name: 'Dragon Ball Z: Budokai 2', gameConsole: 'Gamecube', price: 20 },
+    { id: uniqid(), name: 'Need for Speed: Most Wanted', gameConsole: 'Gamecube', price: 20 },
+    { id: uniqid(), name: 'Sonic Heroes', gameConsole: 'Gamecube', price: 20 },
+    { id: uniqid(), name: 'The Simpsons: Hit & Run', gameConsole: 'Gamecube', price: 20 },
 ];
 
 export default shopProducts;
