@@ -21,13 +21,14 @@ const Store = () => {
                     <button key={i} onClick={() => filterProducts(console)} className={`console-selector__item ${selectedConsole === console ? 'active' : ''}`}>{console}</button>
                 ))}
             </div>
+            <Pagination/>
             <div className="product-container">
                 {currentPosts.map((product) => (
                     <Product key={product.id} product={product}
                     data-testid="product-component"/>
                 ))}
             </div>
-            <Pagination/>
+            {/* <Pagination/> */}
         </section>
     )
 }

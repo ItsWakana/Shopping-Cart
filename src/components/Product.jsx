@@ -12,17 +12,19 @@ const Product = ({ product }) => {
         <div key={product.id} className="product">
             <h4 className="product__heading">{product.name}</h4>
             
-            <img className="product__photo"
-            src={imageUrl} 
-            alt={product.name}></img>
+            <div className="product__details">
+                <img className="product__photo"
+                src={imageUrl} 
+                alt={product.name}></img>
 
-            <p>£{product.price}</p>
-            <div className="product__input-container">
-                <button className="add-basket-btn"
-                onClick={() => {handleCartAdd(product);
-                                showBasketModal() }}>
-                    Add to Cart
-                </button>
+                <p>£{product.price}</p>
+                <div className="product__input-container">
+                    <button className="add-basket-btn"
+                    onClick={() => {handleCartAdd(product);
+                                    showBasketModal() }}>
+                        Add to Cart
+                    </button>
+                </div>
             </div>
         </div>
         )
