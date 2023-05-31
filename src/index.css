@@ -129,16 +129,33 @@ body {
 .cart-modal {
   position: fixed;
   opacity: 0;
-  /* width: 70%; */
   height: 70%;
   border: solid 1px var(--outline-color);
+  border-radius: 5px;
   background: var(--third-color);
   top: -400px;
-  /* top: 70px; */
   top: 90px;
   right: -250px;
   z-index: 999;
   transition:250ms ease-in-out;
+}
+
+.cart-modal__overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 200;
+  transition:100ms ease-in-out;
+}
+
+.cart-modal__overlay.active {
+  opacity: .7;
+  pointer-events: all;
 }
 
 .cart-modal.open {

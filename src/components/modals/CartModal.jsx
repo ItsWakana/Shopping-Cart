@@ -11,6 +11,7 @@ const CartModal = () => {
     const { showBasket, hideBasketModal } = useContext(NavigationContext);
     const { cart } = useContext(CartContext);
     return (
+        <>
         <div className={`cart-modal ${showBasket ? 'open' : ''}`}>
             {cart.length ? (
                 <>
@@ -39,6 +40,8 @@ const CartModal = () => {
                     </Link>
                 </div>}
         </div>
+        <div onClick={hideBasketModal} className={`cart-modal__overlay ${showBasket ? 'active' : ''}`}></div>
+        </>
     )
 }
 
