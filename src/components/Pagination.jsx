@@ -32,7 +32,7 @@ const Pagination = () => {
         <div className="pagination-container">
             <button onClick={setPrevPage} disabled={currentPage === 1}className="pagination-container__item-prev">{'<'}</button>
             {pageNumbers.map((number) => (
-                <div key={number} className="pagination-container__item"
+                <div key={number} className={`pagination-container__item ${currentPage === number ? 'active' : ''}`}
                 onClick={() => setPagination(number)} >
                     {number}
                 </div>

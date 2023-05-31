@@ -88,9 +88,14 @@ body {
   color: var(--secondary-color);
 }
 
-.pagination-container__item:hover {
-  background-color: var(--primary-color);
+.pagination-container__item.active {
+  background-color: var(--secondary-color);
+  color: var(--third-color);
 }
+
+/* .pagination-container__item:hover {
+  background-color: var(--primary-color);
+} */
 
 
 
