@@ -24,11 +24,9 @@ const Store = () => {
             <Pagination/>
             <div className="product-container">
                 {currentPosts.map((product) => (
-                    <Product key={product.id} product={product}
-                    data-testid="product-component"/>
+                    <Product key={product.id} product={product}/>
                 ))}
             </div>
-            {/* <Pagination/> */}
         </section>
     )
 }
