@@ -1,6 +1,9 @@
 import React from "react";
 import { render, screen } from '@testing-library/react';
 import Product from "../components/Product";
+import ShoppingCart from "../components/ShoppingCart";
+import BasketIcon from "../components/BasketIcon";
+
 import userEvent from "@testing-library/user-event";
 import { CartProvider } from "../components/context/CartContext";
 import { NavigationProvider } from "../components/context/NavigationContext";
@@ -9,7 +12,8 @@ describe("Product component", () => {
 
 
     const mockCartContextValue = {
-        handleAddCart: vi.fn()
+        handleAddCart: vi.fn(),
+        cart: []
     }
 
     const mockNavigationContextValue = {
@@ -23,6 +27,8 @@ describe("Product component", () => {
             <NavigationProvider value={mockNavigationContextValue}>
                 <CartProvider value={mockCartContextValue}>
                     <Product product={product}/>
+                    <ShoppingCart />
+                    <BasketIcon />
                 </CartProvider>
             </NavigationProvider>
         );
@@ -46,6 +52,27 @@ describe("Product component", () => {
 
         expect(screen.getByRole('button', {name: /add to cart/i})).toBeInTheDocument();
     });
+
+    it("adds product to basket on click", async () => {
+
+        const user = userEvent.setup();
+
+        const addToCartButton = screen.getByRole('button', {name: /add to cart/i});
+
+        await user.click(addToCartButton);
+
+        // console.log(screen.getByRole(''));
+
+        expect(screen.getByRole('button', {name: /continue to checkout/i})).toBeInTheDocument();
+
+        expect(screen.getByRole('combobox')).toBeInTheDocument();
+        expect(screen.getByRole('heading', {name: /total: £16/i})).toBeInTheDocument();
+
+
+        await user.click(addToCartButton);
+
+        expect(screen.getByRole('heading', {name: /total: £32/i})).toBeInTheDocument();
+    })
 
 
 });
