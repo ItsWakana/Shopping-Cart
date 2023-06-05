@@ -22,7 +22,7 @@ const BasketIcon = () => {
             <div className="basket-icon__container">
                 <img className="basket-icon" src={`${import.meta.env.BASE_URL}basket.svg`}></img>
                 <div className="basket-icon__quantity">
-                    <div>{totalQty}</div>
+                    <div data-testid="quantity">{totalQty}</div>
                 </div>
             </div>
         </div>

@@ -9,20 +9,44 @@ import { CartProvider } from "../components/context/CartContext";
 import { NavigationProvider } from "../components/context/NavigationContext";
 
 describe("Product component", () => {
-
-
-    const mockCartContextValue = {
-        handleAddCart: vi.fn(),
-        cart: []
-    }
-
-    const mockNavigationContextValue = {
-        showBasketModal: vi.fn()
-    }
+    //integration tests for product in relation to how it works with the ShoppingCart, BasketIcon and ErrorModal components.
 
     const product = { id: 1, name: 'Golden Axe II', gameConsole: 'Mega Drive', price: 16 }
 
+    const localStorageMock = (() => {
+        let store = {};
+      
+        return {
+          getItem: key => store[key] || null,
+          setItem: (key, value) => {
+            store[key] = value.toString();
+          },
+          removeItem: key => {
+            delete store[key];
+          },
+          clear: () => {
+            store = {};
+          },
+        };
+    })();
+
+    Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+    });
+
+
     beforeEach(() => {
+
+        localStorage.clear();
+        const mockCartContextValue = {
+            handleAddCart: vi.fn(),
+            cart: []
+        }
+    
+        const mockNavigationContextValue = {
+            showBasketModal: vi.fn()
+        }
+
         render(
             <NavigationProvider value={mockNavigationContextValue}>
                 <CartProvider value={mockCartContextValue}>
@@ -33,7 +57,7 @@ describe("Product component", () => {
                 </CartProvider>
             </NavigationProvider>
         );
-    })
+    });
 
     it("renders correct name and price", () => {
 
@@ -54,7 +78,7 @@ describe("Product component", () => {
         expect(screen.getByRole('button', {name: /add to cart/i})).toBeInTheDocument();
     });
 
-    it("adds product to basket on click", async () => {
+    it("adds product to basket and displays correct total", async () => {
 
         const user = userEvent.setup();
 
@@ -75,17 +99,31 @@ describe("Product component", () => {
         expect(screen.getByRole('heading', {name: /total: £32/i})).toBeInTheDocument();
     });
 
-    it("stops user adding more than 5 products to cart", async () => {
+    it("prevents adding more than 5 products to cart", async () => {
 
         const user = userEvent.setup();
 
         const addToCartButton = screen.getByRole('button', {name: /add to cart/i});
 
-        for (let i=0; i<5; i++) {
+        for (let i=0; i<6; i++) {
             await user.click(addToCartButton);
         }
 
         expect(screen.getByText(/Max quantity reached!/i)).toBeInTheDocument();
+
+        expect(screen.getByTestId('quantity')).toHaveTextContent('5');
+    });
+
+    it("displays correct quantity in cart", async () => {
+
+        const user = userEvent.setup();
+
+        const addToCartButton = screen.getByRole('button', {name: /add to cart/i});
+
+        await user.click(addToCartButton);
+        await user.click(addToCartButton);
+
+        expect(screen.getByRole('combobox')).toHaveValue('2');
     });
 
 
