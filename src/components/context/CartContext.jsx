@@ -1,4 +1,18 @@
 import { useState, useMemo, useEffect, createContext } from "react";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    limit,
+    onSnapshot,
+    setDoc,
+    updateDoc,
+    doc,
+    serverTimestamp,
+} from 'firebase/firestore';
+import { db } from "../../main";
 
 const CartContext = createContext({});
 
@@ -61,27 +75,47 @@ export const CartProvider = ({ children }) => {
         });
     }
 
-    const handleCartAdd = (product) => {
+    const handleCartAdd = async (product) => {
         setItemAdded(true);
-        setCart((cart) => {
-            const updatedCart = cart.every((item) => item.id !== product.id) ? [...cart, {...product, qty: 1}]
-                : cart.map((item) => {
-                    if (item.id === product.id && item.qty === 5) {
-                        setCartError("Max quantity reached!");
-                        return item;
-                    }
-                    if (item.id === product.id) {
-                        return {...item, qty: item.qty + 1}
-                    } else {
-                        return item;
-                    }
-                });
+        // setCart((cart) => {
+        //     const updatedCart = cart.every((item) => item.id !== product.id) ? [...cart, {...product, qty: 1}]
+        //         : cart.map((item) => {
+        //             if (item.id === product.id && item.qty === 5) {
+        //                 setCartError("Max quantity reached!");
+        //                 return item;
+        //             }
+        //             if (item.id === product.id) {
+        //                 return {...item, qty: item.qty + 1}
+        //             } else {
+        //                 return item;
+        //             }
+        //         });
+            
+        //         localStorage.setItem('cart', JSON.stringify(updatedCart));
+                
+        //         return updatedCart;
+        //     });
+        const updatedCart = cart.every((item) => item.id !== product.id) ? [...cart, {...product, qty: 1}]
+            : cart.map((item) => {
+                if (item.id === product.id && item.qty === 5) {
+                    setCartError("Max quantity reached!");
+                    return item;
+                }
+                if (item.id === product.id) {
+                    return {...item, qty: item.qty + 1}
+                } else {
+                    return item;
+                }
+            });
             
             localStorage.setItem('cart', JSON.stringify(updatedCart));
+            setCart(updatedCart);
+            // return updatedCart;
 
-            return updatedCart;
-        });
-    };
+            await setDoc(doc(db, "cart", "cart"), {
+                data: updatedCart
+            });
+        };
 
     const resetError = () => {
         setCartError('');
