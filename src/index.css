@@ -305,6 +305,18 @@ body {
 .nav-link {
   color: var(--secondary-color);
   font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-link.logged {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link.logged > .profile-icon {
+  width: 30px;
+  border-radius: 50%;
 }
 
 
@@ -658,6 +670,7 @@ button:focus-visible {
 
 .desktop-menu {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 @media screen and (max-width: 600px) {

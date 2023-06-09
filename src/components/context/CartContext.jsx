@@ -12,11 +12,46 @@ import {
     doc,
     serverTimestamp,
 } from 'firebase/firestore';
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+} from 'firebase/auth';
+
 import { db } from "../../main";
 
 const CartContext = createContext({});
 
 export const CartProvider = ({ children }) => {
+
+    //user log in state
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleLoginClick = async () => {
+
+        if (isLoggedIn) {
+            signOut(getAuth());
+            setIsLoggedIn(false);
+            return;
+        }
+
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(getAuth(), provider);
+
+        const auth = getAuth();
+        const user = auth.currentUser;
+        setIsLoggedIn(true);
+        console.log(user);
+
+
+    }
+
+    const auth = getAuth();
+    const user = auth.currentUser;
 
     const [cart, setCart] = useState([]);
 
@@ -124,7 +159,7 @@ export const CartProvider = ({ children }) => {
 
     return (
         <CartContext.Provider value={{
-            cart, totalQty, totalPrice, handleCartAdd, itemAdded, setItemAdded, handleQuantityChange, removeCartItem, cartError, setCartError, resetError
+            cart, totalQty, totalPrice, handleCartAdd, itemAdded, setItemAdded, handleQuantityChange, removeCartItem, cartError, setCartError, resetError, handleLoginClick, isLoggedIn, user
         }}>
             {children}
         </CartContext.Provider>
