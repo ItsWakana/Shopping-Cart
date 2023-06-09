@@ -30,34 +30,12 @@ export const CartProvider = ({ children }) => {
     //user log in state
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    const handleLoginClick = async () => {
-
-        if (isLoggedIn) {
-            signOut(getAuth());
-            setIsLoggedIn(false);
-            return;
-        }
-
-        const provider = new GoogleAuthProvider();
-        await signInWithPopup(getAuth(), provider);
-
-        const auth = getAuth();
-        const user = auth.currentUser;
-        setIsLoggedIn(true);
-        console.log(user);
-
-
-    }
-
-    const auth = getAuth();
-    const user = auth.currentUser;
-
+    const [user, setUser] = useState(null);
+    
     const [cart, setCart] = useState([]);
 
     const [itemAdded, setItemAdded] = useState(false);
 
-    // const [maxItemQuantityErr, setMaxItemQuantityErr] = useState(false);
     const [cartError, setCartError] = useState('');
 
     useEffect(() => {
@@ -68,24 +46,37 @@ export const CartProvider = ({ children }) => {
         }
 
     },[]);
-    // const totalQty = cart.reduce((acc, curr) => {
-    //     return acc + curr.qty;
-    // }, 0);
 
     const totalQty = useMemo(() => cart.reduce((acc, curr) => {
         return acc + curr.qty;
     }, 0),[cart]);
 
-    // const totalPrice = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
     const totalPrice = useMemo(() => cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0),[cart]);
+
+    const handleLoginClick = async () => {
+
+        if (isLoggedIn) {
+            signOut(getAuth());
+            setUser(null);
+            setIsLoggedIn(false);
+            return;
+        }
+
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(getAuth(), provider);
+
+        const auth = getAuth();
+        // const user = auth.currentUser;
+        setUser(auth.currentUser);
+        setIsLoggedIn(true);
+
+        await setDoc(doc(db, auth.currentUser.uid, "cart"), {
+            data: cart
+        });
+    }
 
     const handleQuantityChange = (quantity, productId) => {
         setItemAdded(true);
-        // const updatedCart = cart.map((item) => item.id === productId ? { ...item, qty: quantity} : item);
-
-        // localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-        // setCart(updatedCart);
 
         setCart((cart) => {
             const updatedCart = cart.map((item) => item.id === productId ? { ...item, qty: quantity} : item);
@@ -94,8 +85,6 @@ export const CartProvider = ({ children }) => {
 
             return updatedCart;
         });
-        // setCart((cart) => cart.map((item) => item.id === productId ? {...item, qty: quantity} : item));
-
     }
 
     const removeCartItem = (productId) => {
@@ -112,24 +101,6 @@ export const CartProvider = ({ children }) => {
 
     const handleCartAdd = async (product) => {
         setItemAdded(true);
-        // setCart((cart) => {
-        //     const updatedCart = cart.every((item) => item.id !== product.id) ? [...cart, {...product, qty: 1}]
-        //         : cart.map((item) => {
-        //             if (item.id === product.id && item.qty === 5) {
-        //                 setCartError("Max quantity reached!");
-        //                 return item;
-        //             }
-        //             if (item.id === product.id) {
-        //                 return {...item, qty: item.qty + 1}
-        //             } else {
-        //                 return item;
-        //             }
-        //         });
-            
-        //         localStorage.setItem('cart', JSON.stringify(updatedCart));
-                
-        //         return updatedCart;
-        //     });
         const updatedCart = cart.every((item) => item.id !== product.id) ? [...cart, {...product, qty: 1}]
             : cart.map((item) => {
                 if (item.id === product.id && item.qty === 5) {
@@ -146,10 +117,12 @@ export const CartProvider = ({ children }) => {
             localStorage.setItem('cart', JSON.stringify(updatedCart));
             setCart(updatedCart);
             // return updatedCart;
-
-            await setDoc(doc(db, "cart", "cart"), {
-                data: updatedCart
-            });
+            console.log(user);
+            if (user) {
+                await setDoc(doc(db, user.uid, "cart"), {
+                    data: cart
+                });
+            }
         };
 
     const resetError = () => {
