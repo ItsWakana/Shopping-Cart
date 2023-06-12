@@ -41,14 +41,10 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
 
-
-        //when the application mounts, we first want to check our users localStorage and set that if it exists already.
-
         if (isLoggedIn) {
             getFirebaseData();
             return;
         }
-        //we can put the isLoggedIn bool as a useEffect dependency, then at the top here we could check if isLoggedIn is true. If it is we can check the users storage on firebase and if there is any data on the cart on there. If there is we can get the data from there, and simply return out of the useEffect.
 
         const localStorageData = JSON.parse(localStorage.getItem('cart'));
 
@@ -93,36 +89,56 @@ export const CartProvider = ({ children }) => {
     
             const cartData = await getFirebaseData(auth.currentUser.uid);
             setCart(cartData);
-            // await setDoc(doc(db, auth.currentUser.uid, "cart"), {
-            //     data: cart
-            // });
+   
         } catch(err) {
             console.log(err);
         }
     }
 
-    const handleQuantityChange = (quantity, productId) => {
+    const handleQuantityChange = async (quantity, productId) => {
         setItemAdded(true);
 
-        setCart((cart) => {
-            const updatedCart = cart.map((item) => item.id === productId ? { ...item, qty: quantity} : item);
+        const updatedCart = cart.map((item) => item.id === productId ? {...item, qty: quantity} : item);
 
-            localStorage.setItem('cart', JSON.stringify(updatedCart));
+        if (isLoggedIn) {
+            await setDoc(doc(db, user.uid, "cart"), {
+                data: updatedCart
+            });
+        } else {
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+        }
 
-            return updatedCart;
-        });
+        setCart(updatedCart);
+        // setCart((cart) => {
+        //     const updatedCart = cart.map((item) => item.id === productId ? { ...item, qty: quantity} : item);
+
+        //     localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+        //     return updatedCart;
+        // });
     }
 
-    const removeCartItem = (productId) => {
-        // setCart((cart) => cart.filter((item) => item.id !== productId));
+    const removeCartItem = async (productId) => {
 
-        setCart((cart) => {
-            const updatedCart = cart.filter((item) => item.id !== productId);
+        const updatedCart = cart.filter((item) => item.id !== productId);
 
-            localStorage.setItem('cart', JSON.stringify(updatedCart));
 
-            return updatedCart;
-        });
+        if (isLoggedIn) {
+            await setDoc(doc(db, user.uid, "cart"), {
+                data: updatedCart
+            });
+        } else {
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+        }
+
+        setCart(updatedCart);
+        // setCart((cart) => {
+        //     const updatedCart = cart.filter((item) => item.id !== productId);
+
+        //     localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+        //     return updatedCart;
+        // });
     }
 
     const handleCartAdd = async (product) => {
