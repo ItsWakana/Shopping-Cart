@@ -1,5 +1,7 @@
 import shopProducts from "../../products";
 import { useState, createContext } from 'react';
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../main";
 
 export const StoreContext = createContext({});
 
@@ -7,15 +9,16 @@ const StoreProvider = ({ children }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(3);
+
     let localProducts = JSON.parse(localStorage.getItem('products'));
     
     if (!localProducts) {
         localProducts = shopProducts;
         localStorage.setItem('products', JSON.stringify(shopProducts));
     }
-
+    
     const [selectedConsole, setSelectedConsole] = useState(null);
-
+    
     const [selectedProducts, setSelectedProducts] = useState(localProducts);
     
     const indexOfLastPost = currentPage * postsPerPage;
