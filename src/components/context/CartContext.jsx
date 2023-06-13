@@ -61,13 +61,15 @@ export const CartProvider = ({ children }) => {
     const totalPrice = useMemo(() => cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0),[cart]);
 
     const getFirebaseData = async (userId) => {
-        const docRef = doc(db, userId, "cart");
+
+        const docRef = doc(db, `/${userId}`, "cart");
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            return docSnap.data().data;
+            const arrayData = Object.values(docSnap.data());
+            return arrayData;
         } else {
-            console.log('No such data!');
+            return null;
         }
     }
     const handleLoginClick = async () => {
@@ -88,7 +90,9 @@ export const CartProvider = ({ children }) => {
             setIsLoggedIn(true);
     
             const cartData = await getFirebaseData(auth.currentUser.uid);
-            setCart(cartData);
+            if (cartData) {
+                setCart(cartData);
+            }
    
         } catch(err) {
             console.log(err);
@@ -100,22 +104,21 @@ export const CartProvider = ({ children }) => {
 
         const updatedCart = cart.map((item) => item.id === productId ? {...item, qty: quantity} : item);
 
+        const updatedItem = cart.find((item) => item.id === productId);
+
         if (isLoggedIn) {
-            await setDoc(doc(db, user.uid, "cart"), {
-                data: updatedCart
-            });
+
+            const cartRef = doc(db, `/${user.uid}`, "cart");
+            
+            // await setDoc(doc(db, user.uid, "cart"), {
+            //     data: updatedCart
+            // }, { merge: true });
+
         } else {
             localStorage.setItem("cart", JSON.stringify(updatedCart));
         }
 
         setCart(updatedCart);
-        // setCart((cart) => {
-        //     const updatedCart = cart.map((item) => item.id === productId ? { ...item, qty: quantity} : item);
-
-        //     localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-        //     return updatedCart;
-        // });
     }
 
     const removeCartItem = async (productId) => {
@@ -126,19 +129,12 @@ export const CartProvider = ({ children }) => {
         if (isLoggedIn) {
             await setDoc(doc(db, user.uid, "cart"), {
                 data: updatedCart
-            });
+            }, { merge: true });
         } else {
             localStorage.setItem("cart", JSON.stringify(updatedCart));
         }
 
         setCart(updatedCart);
-        // setCart((cart) => {
-        //     const updatedCart = cart.filter((item) => item.id !== productId);
-
-        //     localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-        //     return updatedCart;
-        // });
     }
 
     const handleCartAdd = async (product) => {
@@ -158,21 +154,31 @@ export const CartProvider = ({ children }) => {
             
 
             if (isLoggedIn) {
-                await setDoc(doc(db, user.uid, "cart"), {
-                    data: updatedCart
-                });
+                setCart(updatedCart);
+                // await setDoc(doc(db, user.uid, "cart"), {
+                //     data: updatedCart
+                // }, { merge: true });
+
+                const cartDocRef = doc(db, `/${user.uid}`, "cart");
+                const cartSnapshot = await getDoc(cartDocRef);
+
+                for (let i=0; i<updatedCart.length; i++) {
+                    const updatedFields = {
+                        [`item${i}`]: updatedCart[i]
+                    }
+                    
+                    if (!cartSnapshot.exists()) {
+                        await setDoc(doc(db, user.uid, "cart"), {
+                            [`item0`]: product
+                        });
+                        return;
+                    }
+                    await updateDoc(cartDocRef, updatedFields);
+                }
             } else {
                 localStorage.setItem("cart", JSON.stringify(updatedCart));
+                setCart(updatedCart);
             }
-            setCart(updatedCart);
-            // localStorage.setItem('cart', JSON.stringify(updatedCart));
-            // setCart(updatedCart);
-
-            // if (user) {
-            //     await setDoc(doc(db, user.uid, "cart"), {
-            //         data: updatedCart
-            //     });
-            // }
         };
 
     const resetError = () => {
