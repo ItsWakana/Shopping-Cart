@@ -11,7 +11,8 @@ import {
     updateDoc,
     doc,
     serverTimestamp,
-    getDoc
+    getDoc,
+    deleteField
 } from 'firebase/firestore';
 
 import {
@@ -67,6 +68,7 @@ export const CartProvider = ({ children }) => {
 
         if (docSnap.exists()) {
             const arrayData = Object.values(docSnap.data());
+            console.log(arrayData);
             return arrayData;
         } else {
             return null;
@@ -104,12 +106,16 @@ export const CartProvider = ({ children }) => {
 
         const updatedCart = cart.map((item) => item.id === productId ? {...item, qty: quantity} : item);
 
-        const updatedItem = cart.find((item) => item.id === productId);
-
+        
         if (isLoggedIn) {
-
+            
             const cartRef = doc(db, `/${user.uid}`, "cart");
             
+            const updatedItem = updatedCart.find((item) => item.id === productId);
+
+            await updateDoc(cartRef, {
+                [productId]: updatedItem
+            });
             // await setDoc(doc(db, user.uid, "cart"), {
             //     data: updatedCart
             // }, { merge: true });
@@ -127,9 +133,14 @@ export const CartProvider = ({ children }) => {
 
 
         if (isLoggedIn) {
-            await setDoc(doc(db, user.uid, "cart"), {
-                data: updatedCart
-            }, { merge: true });
+            const cartRef = doc(db, `/${user.uid}`, "cart");
+
+            // await setDoc(doc(db, user.uid, "cart"), {
+            //     data: updatedCart
+            // }, { merge: true });
+            await updateDoc(cartRef, {
+                [productId]: deleteField()
+            });
         } else {
             localStorage.setItem("cart", JSON.stringify(updatedCart));
         }
@@ -150,35 +161,53 @@ export const CartProvider = ({ children }) => {
                 } else {
                     return item;
                 }
-            });
+        });
             
+        if (isLoggedIn) {
+            setCart(updatedCart);
+            // await setDoc(doc(db, user.uid, "cart"), {
+            //     data: updatedCart
+            // }, { merge: true });
 
-            if (isLoggedIn) {
-                setCart(updatedCart);
-                // await setDoc(doc(db, user.uid, "cart"), {
-                //     data: updatedCart
-                // }, { merge: true });
+            const cartDocRef = doc(db, `/${user.uid}`, "cart");
+            const cartSnapshot = await getDoc(cartDocRef);
 
-                const cartDocRef = doc(db, `/${user.uid}`, "cart");
-                const cartSnapshot = await getDoc(cartDocRef);
 
-                for (let i=0; i<updatedCart.length; i++) {
-                    const updatedFields = {
-                        [`item${i}`]: updatedCart[i]
+            //set the id of the item as the key of the product in the cart field, that way we can just refer to the product.id when adding the key for the updated product.
+
+            if (!cartSnapshot.exists()) {
+                await setDoc(doc(db, user.uid, "cart") , {
+                    [product.id]: {
+                        ...product,
+                        qty: 1
                     }
-                    
-                    if (!cartSnapshot.exists()) {
-                        await setDoc(doc(db, user.uid, "cart"), {
-                            [`item0`]: product
-                        });
-                        return;
-                    }
-                    await updateDoc(cartDocRef, updatedFields);
-                }
-            } else {
-                localStorage.setItem("cart", JSON.stringify(updatedCart));
-                setCart(updatedCart);
+                });
+                return;
             }
+
+            const updatedProduct = updatedCart.find((item) => item.id === product.id);
+
+            await updateDoc(cartDocRef, {
+                [product.id]: updatedProduct
+            });
+
+            // for (let i=0; i<updatedCart.length; i++) {
+            //     const updatedFields = {
+            //         [`item${i}`]: updatedCart[i]
+            //     }
+                
+            //     if (!cartSnapshot.exists()) {
+            //         await setDoc(doc(db, user.uid, "cart"), {
+            //             [`item0`]: product
+            //         });
+            //         return;
+            //     }
+            //     await updateDoc(cartDocRef, updatedFields);
+            // }
+        } else {
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+            setCart(updatedCart);
+        }
         };
 
     const resetError = () => {
