@@ -29,15 +29,10 @@ const CartContext = createContext({});
 
 export const CartProvider = ({ children }) => {
 
-    //user log in state
-
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
-    
     const [cart, setCart] = useState([]);
-
     const [itemAdded, setItemAdded] = useState(false);
-
     const [cartError, setCartError] = useState('');
 
     useEffect(() => {
@@ -68,12 +63,12 @@ export const CartProvider = ({ children }) => {
 
         if (docSnap.exists()) {
             const arrayData = Object.values(docSnap.data());
-            console.log(arrayData);
             return arrayData;
         } else {
             return null;
         }
     }
+    
     const handleLoginClick = async () => {
 
         if (isLoggedIn) {
@@ -116,9 +111,6 @@ export const CartProvider = ({ children }) => {
             await updateDoc(cartRef, {
                 [productId]: updatedItem
             });
-            // await setDoc(doc(db, user.uid, "cart"), {
-            //     data: updatedCart
-            // }, { merge: true });
 
         } else {
             localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -135,9 +127,6 @@ export const CartProvider = ({ children }) => {
         if (isLoggedIn) {
             const cartRef = doc(db, `/${user.uid}`, "cart");
 
-            // await setDoc(doc(db, user.uid, "cart"), {
-            //     data: updatedCart
-            // }, { merge: true });
             await updateDoc(cartRef, {
                 [productId]: deleteField()
             });
@@ -165,15 +154,9 @@ export const CartProvider = ({ children }) => {
             
         if (isLoggedIn) {
             setCart(updatedCart);
-            // await setDoc(doc(db, user.uid, "cart"), {
-            //     data: updatedCart
-            // }, { merge: true });
 
             const cartDocRef = doc(db, `/${user.uid}`, "cart");
             const cartSnapshot = await getDoc(cartDocRef);
-
-
-            //set the id of the item as the key of the product in the cart field, that way we can just refer to the product.id when adding the key for the updated product.
 
             if (!cartSnapshot.exists()) {
                 await setDoc(doc(db, user.uid, "cart") , {
@@ -191,19 +174,6 @@ export const CartProvider = ({ children }) => {
                 [product.id]: updatedProduct
             });
 
-            // for (let i=0; i<updatedCart.length; i++) {
-            //     const updatedFields = {
-            //         [`item${i}`]: updatedCart[i]
-            //     }
-                
-            //     if (!cartSnapshot.exists()) {
-            //         await setDoc(doc(db, user.uid, "cart"), {
-            //             [`item0`]: product
-            //         });
-            //         return;
-            //     }
-            //     await updateDoc(cartDocRef, updatedFields);
-            // }
         } else {
             localStorage.setItem("cart", JSON.stringify(updatedCart));
             setCart(updatedCart);
