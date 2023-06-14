@@ -23,7 +23,8 @@ import {
     signOut,
 } from 'firebase/auth';
 
-import { db } from "../../main";
+// import { db } from "../../main";
+import { db } from "../../firebaseInit";
 import shopProducts from "../../products";
 const CartContext = createContext({});
 

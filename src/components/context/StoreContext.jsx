@@ -1,7 +1,8 @@
 import shopProducts from "../../products";
 import { useState, createContext } from 'react';
 import { collection, doc, setDoc } from "firebase/firestore";
-import { db } from "../../main";
+// import { db } from "../../main";
+import { db } from "../../firebaseInit";
 
 export const StoreContext = createContext({});
 
