@@ -24,7 +24,7 @@ import {
 } from 'firebase/auth';
 
 import { db } from "../../main";
-
+import shopProducts from "../../products";
 const CartContext = createContext({});
 
 export const CartProvider = ({ children }) => {
@@ -57,6 +57,19 @@ export const CartProvider = ({ children }) => {
     const totalPrice = useMemo(() => cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0),[cart]);
 
     const getFirebaseData = async (userId) => {
+
+        const productsRef = doc(db, "products", "product list");
+        const productsSnap = await getDoc(productsRef);
+
+        if (!productsSnap.exists()) {
+            for (let i=0; i< shopProducts.length; i++) {
+                await updateDoc(productsRef, {
+                    [shopProducts[i].id]: {
+                        ...shopProducts[i]
+                    }
+                });
+            }
+        }
 
         const docRef = doc(db, `/${userId}`, "cart");
         const docSnap = await getDoc(docRef);
@@ -165,7 +178,6 @@ export const CartProvider = ({ children }) => {
                         qty: 1
                     }
                 });
-                return;
             }
 
             const updatedProduct = updatedCart.find((item) => item.id === product.id);
