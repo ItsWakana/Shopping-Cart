@@ -1,6 +1,9 @@
 import { useContext, useState} from "react";
 import CartContext from "./context/CartContext";
 import NavigationContext from "./context/NavigationContext";
+import { storage } from "../firebaseInit";
+import { ref, getDownloadURL } from "firebase/storage";
+
 const Product = ({ product }) => {
 
     const { handleCartAdd } = useContext(CartContext);
@@ -11,7 +14,9 @@ const Product = ({ product }) => {
     const handleImageChange = () => {
         setImageChanged((prev) => !prev);
     }
+    // const productImageRef = ref(storage, `images/${product.gameConsole.toLowerCase()}/${product.name}.jpg`);
 
+    // const url = getDownloadURL(productImageRef);
     const baseImageUrl = `${import.meta.env.BASE_URL}images/${product.gameConsole.toLowerCase()}/${product.name}.jpg`;
     return (
         <div key={product.id} className="product">
