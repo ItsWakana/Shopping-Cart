@@ -7,7 +7,7 @@ const Store = () => {
 
     const { hideMobileMenu } = useContext(NavigationContext);
 
-    const { currentPosts, localProducts, filterProducts, selectedProducts, consoleOptions, selectedConsole } = useContext(StoreContext);
+    const { currentPosts, filterProducts, selectedProducts, consoleOptions, selectedConsole } = useContext(StoreContext);
 
     useEffect(() => {
         hideMobileMenu(false);

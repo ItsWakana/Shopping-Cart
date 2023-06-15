@@ -1,6 +1,6 @@
 import shopProducts from "../../products";
-import { useState, createContext } from 'react';
-import { collection, doc, setDoc } from "firebase/firestore";
+import { useState, createContext, useEffect, useRef } from 'react';
+import { getDoc, doc } from "firebase/firestore";
 // import { db } from "../../main";
 import { db } from "../../firebaseInit";
 
@@ -11,26 +11,40 @@ const StoreProvider = ({ children }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(3);
 
-    let localProducts = JSON.parse(localStorage.getItem('products'));
+    useEffect(() => {
+
+        const getProductsFromFirebase = async () => {
+
+            const productsRef = doc(db, "products", "product list");
     
-    if (!localProducts) {
-        localProducts = shopProducts;
-        localStorage.setItem('products', JSON.stringify(shopProducts));
-    }
+            const productsSnap = await getDoc(productsRef);
     
+            // console.log(Object.values(productsSnap.data()));
+            const productList = Object.values(productsSnap.data());
+            setSelectedProducts(productList);
+            fullProductList.current = productList;
+        }
+
+        getProductsFromFirebase();
+    },[]);
+
+    const fullProductList = useRef(null);
+
     const [selectedConsole, setSelectedConsole] = useState(null);
     
-    const [selectedProducts, setSelectedProducts] = useState(localProducts);
+    const [selectedProducts, setSelectedProducts] = useState(null);
     
+    if (!selectedProducts) {
+        return null;
+    }
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = selectedProducts.slice(indexOfFirstPost, indexOfLastPost);
     const consoleOptions = ['Mega Drive', 'Gamecube', 'Dreamcast'];
-
+    
     const filterProducts = (console) => {
         setSelectedConsole(console);
-
-        setSelectedProducts(localProducts.filter((product) => product.gameConsole === console));
+        setSelectedProducts(fullProductList.current.filter((product) => product.gameConsole === console));
     }
 
     const setPagination = (pageNumber) => {
@@ -47,9 +61,9 @@ const StoreProvider = ({ children }) => {
 
     return (
         <StoreContext.Provider value={{
-            setPagination, localProducts, currentPosts,
+            setPagination, currentPosts,
             postsPerPage, setNextPage, setPrevPage, currentPage,
-            filterProducts, selectedConsole, consoleOptions, selectedProducts
+            filterProducts, selectedConsole, consoleOptions, selectedProducts, fullProductList
         }}>
             {children}
         </StoreContext.Provider>
