@@ -16,19 +16,21 @@ describe("Store component", () => {
             </NavigationProvider>
         )
     });
-    it("renders storepage heading", () => {
+    it("renders storepage heading", async () => {
 
-        expect(screen.getByRole('heading', { name: /product list/i})).toBeInTheDocument();
+        const heading = await screen.findByRole('heading', { name: /product list/i});
+
+        expect(heading).toBeInTheDocument();
 
     });
 
-    it("displays console headings correctly", () => {
+    it("displays console headings correctly", async () => {
 
-        expect(screen.getByRole('button', {name: /mega drive/i})).toBeInTheDocument();
+        expect(await screen.findByRole('button', {name: /mega drive/i})).toBeInTheDocument();
 
-        expect(screen.getByRole('button', {name: /gamecube/i})).toBeInTheDocument();
+        expect(await screen.findByRole('button', {name: /gamecube/i})).toBeInTheDocument();
 
-        expect(screen.getByRole('button', {name: /dreamcast/i})).toBeInTheDocument();
+        expect(await screen.findByRole('button', {name: /dreamcast/i})).toBeInTheDocument();
 
     });
 });

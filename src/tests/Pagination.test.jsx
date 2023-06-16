@@ -24,30 +24,34 @@ describe("Pagination component", () => {
         );
     });
 
-    it("displays correct number of page numbers", () => {
+    it("displays correct number of page numbers", async () => {
         
         let pageNumber = 1;
 
         while (pageNumber < 9) {
 
-            expect(screen.getByRole('button', {name: pageNumber++})).toBeInTheDocument();
+            const numberButton = await screen.findByRole("button", {name: pageNumber++});
+
+            expect(numberButton).toBeInTheDocument();
         }
 
         expect(screen.getByRole('button', {name: '>'})).toBeInTheDocument();
         expect(screen.getByRole('button', {name: '<'})).toBeInTheDocument();
     });
 
-    it("disables previous button if user is on first page", () => {
+    it("disables previous button if user is on first page", async () => {
 
-        expect(screen.getByRole('button', {name: '<'})).toBeDisabled();
+        const prevButton = await screen.findByRole("button", {name: '<'});
+
+        expect(prevButton).toBeDisabled();
     });
 
     it("disables next button if user is on the last page", async () => {
 
         const user = userEvent.setup();
 
-        const nextButton = screen.getByRole('button', {name: 8});
-
+        const nextButton = await screen.findByRole('button', {name: 8});
+        
         await user.click(nextButton);
 
         expect(screen.getByRole('button', {name: '>'})).toBeDisabled();
