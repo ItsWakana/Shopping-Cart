@@ -1,7 +1,7 @@
 import shopProducts from "../../products";
+import useProducts from "../../hooks/useProducts";
 import { useState, createContext, useEffect, useRef } from 'react';
 import { getDoc, doc } from "firebase/firestore";
-// import { db } from "../../main";
 import { db } from "../../firebaseInit";
 
 export const StoreContext = createContext({});
@@ -11,28 +11,13 @@ const StoreProvider = ({ children }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(3);
 
-    useEffect(() => {
-
-        const getProductsFromFirebase = async () => {
-
-            const productsRef = doc(db, "products", "product list");
-    
-            const productsSnap = await getDoc(productsRef);
-    
-            // console.log(Object.values(productsSnap.data()));
-            const productList = Object.values(productsSnap.data());
-            setSelectedProducts(productList);
-            fullProductList.current = productList;
-        }
-
-        getProductsFromFirebase();
-    },[]);
-
-    const fullProductList = useRef(null);
+    const {
+        selectedProducts, 
+        setSelectedProducts, 
+        fullProductList
+    } = useProducts();
 
     const [selectedConsole, setSelectedConsole] = useState(null);
-    
-    const [selectedProducts, setSelectedProducts] = useState(null);
     
     if (!selectedProducts) {
         return null;
